@@ -1,7 +1,33 @@
-Klient chcąc wyszukać samochód powinien wybrać z listy lokal będący w najdogodniejszej dla siebie lokalizacji oraz wybrać datę i długość wypożyczenia (umożliwi to np. określenie kosztów wypożyczenia i wyświetlenia jej klientowi), aby wyświetlone zostały tylko dostępne pojazdy. Kiedy samochód zostanie wybrany (na chwilę obecną można wypożyczać jedno auto jednocześnie, stąd połączenie jeden do wielu) klient zostanie poproszony o podanie swoich danych lub zalogowanie/zarejestrowanie się w serwisie, w tym przypadku dane zostaną pobrane z bazy danych, a klient będzie mógł je zweryfikować i w razie błędów (np. nieaktualny nr telefonu) będzie mógł je poprawić. Ostatnią rzeczą do zakończenia rezerwacji jest podanie dat początku i końca wypożyczenia. Klient zostanie poinformowany o możliwości przedłużenia wypożyczenia, a w razie nie dotrzymania terminów (oddania samochodu) zostanie na niego nałożona kara lub zwiększenie koszów wynajmu za każdy kolejny dzień spóźnienia.
-Klient odbiera samochód w lokalu, który wybrał podczas rezerwacji, wydawane są mu klucze przez jednego z pracowników. Cena za wynajem samochodu zaczyna się z data_początku_wypożyczenia z tabeli Rezerwacja. Klient może zwrócić samochód w dowolnym czasie (przed data_końca_wypożyczenia), oraz może zwrócić samochód w dowolnym z lokalów wypożyczalni. W razie spóźnienia się z oddaniem samochodu zostanie nałożona kara (jak wyżej). Odbiór samochodu potwierdza pracownik, z tabeli Pracownik poprzez id_lokalu jest zmieniane pole id_lokalu w wypożyczanym samochodzie, aby nie figurował na liście dostępnych samochodów pod złym adresem. Na sam koniec zostanie utworzone nowe wypożyczenie w tabeli Wypożyczenia oraz z podsumowaniem, ile samochód zarobił na konkretnym wypożyczeniu. Dane z poprzednich tabel można wykorzystać do utworzenia zestawienia Samochód -> Długość wypożyczenia określona w datach -> Miejsce wypożyczenia -> Miejsce oddania samochodu -> Zarobek z konkretnej trasy
+Klient chcąc wyszukać samochód powinien wybrać z listy lokal będący w najdogodniejszej dla siebie
+lokalizacji oraz wybrać datę i długość wypożyczenia (umożliwi to np. określenie kosztów wypożyczenia
+i wyświetlenia jej klientowi), aby wyświetlone zostały tylko dostępne pojazdy. Kiedy samochód
+zostanie wybrany (na chwilę obecną można wypożyczać jedno auto jednocześnie, stąd połączenie jeden do
+ wielu) klient zostanie poproszony o podanie swoich danych lub zalogowanie/zarejestrowanie się w
+ serwisie, w tym przypadku dane zostaną pobrane z bazy danych, a klient będzie mógł je zweryfikować i
+  w razie błędów (np. nieaktualny nr telefonu) będzie mógł je poprawić. Ostatnią rzeczą do
+  zakończenia rezerwacji jest podanie dat początku i końca wypożyczenia. Klient zostanie
+  poinformowany o możliwości przedłużenia wypożyczenia, a w razie nie dotrzymania terminów (oddania
+  samochodu) zostanie na niego nałożona kara lub zwiększenie koszów wynajmu za każdy kolejny dzień
+  spóźnienia.
+Klient odbiera samochód w lokalu, który wybrał podczas rezerwacji, wydawane są mu klucze przez
+jednego z pracowników. Cena za wynajem samochodu zaczyna się z data_początku_wypożyczenia z tabeli
+Rezerwacja. Klient może zwrócić samochód w dowolnym czasie (przed data_końca_wypożyczenia), oraz może
+ zwrócić samochód w dowolnym z lokalów wypożyczalni. W razie spóźnienia się z oddaniem samochodu
+ zostanie nałożona kara (jak wyżej). Odbiór samochodu potwierdza pracownik, z tabeli Pracownik
+ poprzez id_lokalu jest zmieniane pole id_lokalu w wypożyczanym samochodzie, aby nie figurował na
+ liście dostępnych samochodów pod złym adresem. Na sam koniec zostanie utworzone nowe wypożyczenie w
+ tabeli Wypożyczenia oraz z podsumowaniem, ile samochód zarobił na konkretnym wypożyczeniu. Dane z
+ poprzednich tabel można wykorzystać do utworzenia zestawienia Samochód -> Długość wypożyczenia
+ określona w datach -> Miejsce wypożyczenia -> Miejsce oddania samochodu -> Zarobek z konkretnej
+ trasy
 
-Pracownik jest w stanie będąc na miejscu w salonie stworzyć Rezerwację Klientowi, nie jest on w stanie założyć Klientowi konta, ale jest w stanie wpisać jego dane do systemu które zostaną wpisane. Pracownik gównie zajmuje się wydawaniem Samochodu oraz jego odbiorem. Odbiór samochodu w danym Lokalu dodaje tenże samochód do listy samochodów jakie posiada ten Lokal.
+
+Pracownik jest w stanie będąc na miejscu w salonie stworzyć Rezerwację Klientowi, nie jest on w
+stanie założyć Klientowi konta, ale jest w stanie wpisać jego dane do systemu które zostaną wpisane.
+ Pracownik gównie zajmuje się wydawaniem Samochodu oraz jego odbiorem. Odbiór samochodu w danym
+ Lokalu dodaje tenże samochód do listy samochodów jakie posiada ten Lokal.
 
 
-? Funkcjonalności dla administratora/właściciela to dodawanie, edycja, usuwanie, samochodów/pracowników
+
+? Funkcjonalności dla administratora/właściciela to dodawanie, edycja, usuwanie,
+samochodów/pracowników
