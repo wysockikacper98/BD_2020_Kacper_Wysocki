@@ -4,4 +4,4 @@ Klient odbiera samochód w lokalu, który wybrał podczas rezerwacji, wydawane s
 Pracownik jest w stanie będąc na miejscu w salonie stworzyć Rezerwację Klientowi, nie jest on w stanie założyć Klientowi konta, ale jest w stanie wpisać jego dane do systemu które zostaną wpisane. Pracownik gównie zajmuje się wydawaniem Samochodu oraz jego odbiorem. Odbiór samochodu w danym Lokalu dodaje tenże samochód do listy samochodów jakie posiada ten Lokal.
 
 
-? Funkcjonalności dla administratora/właściciela to dodawanie, edycja, usuwanie, samochodów/pracowników
+? Funkcjonalności dla administratora/właściciela to dodawanie, edycja, usuwanie, samochodów/pracowników ?
