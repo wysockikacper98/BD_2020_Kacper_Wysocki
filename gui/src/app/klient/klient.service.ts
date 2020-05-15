@@ -8,7 +8,7 @@ import {catchError, map} from "rxjs/operators";
   providedIn: 'root'
 })
 export class KlientService {
-  URL = 'http://localhost/backend/list.php';
+  URL = 'http://localhost/BD_2020_Kacper_Wysocki/backend/list.php';
   klienci: Klient[];
 
   constructor(private http: HttpClient) { }
