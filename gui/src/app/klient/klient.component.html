@@ -1,0 +1,24 @@
+<div *ngIf="error">{{error}}</div>
+<div *ngIf="succes">{{succes}}</div>
+<div class="container" style="margin-left: 0;">
+  <table class="table table-hover">
+    <thead class="thead-dark">
+    <tr>
+      <th>ID</th>
+      <th>Imie</th>
+      <th>Nazwisko</th>
+      <th>NIP</th>
+      <th>Nr_Telefonu</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let item of klienci">
+      <td>{{item.ID_KLIENTA}}</td>
+      <td>{{item.IMIE}}</td>
+      <td>{{item.NAZWISKO}}</td>
+      <td>{{item.NIP}}</td>
+      <td>{{item.NR_TELEFONU}}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>

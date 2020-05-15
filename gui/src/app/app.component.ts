@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {Klient} from "./klient/klient";
+import {KlientService} from "./klient/klient.service";
 
 @Component({
   selector: 'app-root',
