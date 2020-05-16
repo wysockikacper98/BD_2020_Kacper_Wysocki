@@ -1,0 +1,28 @@
+<!--<p>samochody works!</p>-->
+<div class="container" style="margin-left: 0;">
+  <table class="table table-hover">
+    <thead class="thead-dark">
+    <tr>
+      <th>ID</th>
+      <th>Imie</th>
+      <th>Nazwisko</th>
+      <th>NIP</th>
+      <th>Nr_Telefonu</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let item of samochody">
+      <td>{{item.ID_SAMOCHODU}}</td>
+      <td>{{item.ID_LOKALU}}</td>
+      <td>{{item.MARKA}}</td>
+      <td>{{item.MODEL}}</td>
+      <td>{{item.ROK}}</td>
+      <td>{{item.KOLOR}}</td>
+      <td>{{item.ILOSC_MIEJSC}}</td>
+      <td>{{item.POJEMNOSC_BAGAZNIKA}}</td>
+      <td>{{item.RODZAJ_SKRZYNI_BIEGOW}}</td>
+      <td>{{item.CENA_ZA_DZIEN}}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>

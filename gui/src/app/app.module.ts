@@ -4,11 +4,13 @@ import { HttpClientModule} from "@angular/common/http";
 
 import { AppComponent } from './app.component';
 import { KlientComponent } from './klient/klient.component';
+import { SamochodyComponent } from './samochody/samochody.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     KlientComponent,
+    SamochodyComponent,
   ],
   imports: [
     BrowserModule,
