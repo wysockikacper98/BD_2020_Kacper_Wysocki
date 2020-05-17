@@ -28,53 +28,62 @@
 <!--</div>-->
 
 
-<div class="container " style="background-color: aquamarine">
+<div *ngFor="let item of samochody" class="container" style="margin-bottom: 30px">
   <!--WIERSZ SAMOCHODÓW-->
   <div class="row">
 
     <div class="col-lg-6">
       <!--POJEMNIK NA ZJĘCIA-->
-      <img src="../../assets/samochodyIMG/samochodyPhotos/mercedesA.jpg" class="img-fluid" alt="Mercedes A">
+      <img src="../../assets/samochodyIMG/samochodyPhotos/{{item.MARKA}}{{item.MODEL}}.jpg" class="img-fluid" alt="Samochod">
     </div>
 
-    <div class="col-lg-6 mx-auto " style="background-color: brown"><!-- POJEMNIK NA DANE SAMOCHODÓW-->
+    <div class="col-lg-6 mx-auto "><!-- POJEMNIK NA DANE SAMOCHODÓW-->
 
-      <div class="row ">
-        <div class="col">
+      <div class="row " style="margin-bottom: 10px;">
+        <div class="col text-right">
           <h3>
-            Marka
+            {{item.MARKA}}
           </h3>
         </div>
         <div class="col">
-          <h5>Model</h5>
+          <h3>
+            {{item.MODEL}}
+          </h3>
         </div>
       </div>
-      <div class="row align-middle">
+      <div class="row align-middle" style="margin-bottom: 10px;">
         <div class="col-md-4">
           <img src="assets/samochodyIMG/icony/siedzenie.png" class="img-fluid" alt="Ilość Miejsc">
-          Ilość miejsc
+          {{item.ILOSC_MIEJSC}}
         </div>
         <div class="col-md-4">
           <img src="assets/samochodyIMG/icony/bagaz.png" class="img-fluid" alt="Pojemność bagażnika">
-          Bagażnik
+          {{item.POJEMNOSC_BAGAZNIKA}}
         </div>
         <div class="col-md-4">
           <img src="assets/samochodyIMG/icony/kolor.png" class="img-fluid" alt="Kolor">
-          Kolor
+          {{item.KOLOR}}
         </div>
       </div>
       <div class="row">
         <div class="col-md-4 ">
-          <img src="assets/samochodyIMG/icony/manual.png" class="img-fluid" alt="Skrzynia biegów">
-          Manual
+          <div *ngIf="item.RODZAJ_SKRZYNI_BIEGOW=='M'; else elseBlock">
+            <img src="assets/samochodyIMG/icony/manual.png" class="img-fluid" alt="Manual">
+            Manual
+          </div>
+          <ng-template #elseBlock>
+            <img src="assets/samochodyIMG/icony/automat.png" class="img-fluid" alt="Automat">
+            Automat
+          </ng-template>
+
         </div>
         <div class="col-md-4">
           <img src="assets/samochodyIMG/icony/rok.png" class="img-fluid" alt="Rocznik">
-          Rok
+          {{item.ROK}}
         </div>
         <div class="col-md-4">
           <img src="assets/samochodyIMG/icony/cena.png" class="img-fluid" alt="Cena">
-          Cena
+          {{item.CENA_ZA_DZIEN}}
         </div>
 
 
