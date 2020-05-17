@@ -1,28 +1,84 @@
 <!--<p>samochody works!</p>-->
-<div class="container" style="margin-left: 0;">
-  <table class="table table-hover">
-    <thead class="thead-dark">
-    <tr>
-      <th>ID</th>
-      <th>Imie</th>
-      <th>Nazwisko</th>
-      <th>NIP</th>
-      <th>Nr_Telefonu</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor="let item of samochody">
-      <td>{{item.ID_SAMOCHODU}}</td>
-      <td>{{item.ID_LOKALU}}</td>
-      <td>{{item.MARKA}}</td>
-      <td>{{item.MODEL}}</td>
-      <td>{{item.ROK}}</td>
-      <td>{{item.KOLOR}}</td>
-      <td>{{item.ILOSC_MIEJSC}}</td>
-      <td>{{item.POJEMNOSC_BAGAZNIKA}}</td>
-      <td>{{item.RODZAJ_SKRZYNI_BIEGOW}}</td>
-      <td>{{item.CENA_ZA_DZIEN}}</td>
-    </tr>
-    </tbody>
-  </table>
+<!--<div class="container" style="margin-left: 0;">-->
+<!--  <table class="table table-hover">-->
+<!--    <thead class="thead-dark">-->
+<!--    <tr>-->
+<!--      <th>ID</th>-->
+<!--      <th>Imie</th>-->
+<!--      <th>Nazwisko</th>-->
+<!--      <th>NIP</th>-->
+<!--      <th>Nr_Telefonu</th>-->
+<!--    </tr>-->
+<!--    </thead>-->
+<!--    <tbody>-->
+<!--    <tr *ngFor="let item of samochody">-->
+<!--      <td>{{item.ID_SAMOCHODU}}</td>-->
+<!--      <td>{{item.ID_LOKALU}}</td>-->
+<!--      <td>{{item.MARKA}}</td>-->
+<!--      <td>{{item.MODEL}}</td>-->
+<!--      <td>{{item.ROK}}</td>-->
+<!--      <td>{{item.KOLOR}}</td>-->
+<!--      <td>{{item.ILOSC_MIEJSC}}</td>-->
+<!--      <td>{{item.POJEMNOSC_BAGAZNIKA}}</td>-->
+<!--      <td>{{item.RODZAJ_SKRZYNI_BIEGOW}}</td>-->
+<!--      <td>{{item.CENA_ZA_DZIEN}}</td>-->
+<!--    </tr>-->
+<!--    </tbody>-->
+<!--  </table>-->
+<!--</div>-->
+
+
+<div class="container" style="background-color: aquamarine">
+  <!--WIERSZ SAMOCHODÓW-->
+  <div class="row">
+
+    <div class="col-lg-6">
+      <!--POJEMNIK NA ZJĘCIA-->
+      <img src="assets/samochodyIMG/mercedesA.jpg" class="img-fluid" alt="Mercedes A">
+    </div>
+
+    <div class="col-lg-6 " style="background-color: brown"><!-- POJEMNIK NA DANE SAMOCHODÓW-->
+
+      <div class="row" style="background-color: coral;">
+        <div class="col">
+          Marka
+        </div>
+        <div class="col">
+          Model
+        </div>
+      </div>
+      <div class="row " style="background-color: coral;">
+        <div class="col">
+          <img src="assets/samochodyIMG/icony/siedzenie.png" class="img-fluid" alt="Ilość Miejsc">
+          Ilość miejsc
+        </div>
+        <div class="col">
+          <img src="assets/samochodyIMG/icony/bagaz.png" class="img-fluid" alt="Pojemność bagażnika">
+          Bagażnik
+        </div>
+        <div class="col">
+          <img src="assets/samochodyIMG/icony/kolor.png" class="img-fluid" alt="Kolor">
+          Kolor
+        </div>
+      </div>
+      <div class="row " style="background-color: coral;">
+        <div class="col">
+          <img src="assets/samochodyIMG/icony/manual.png" class="img-fluid" alt="Skrzynia biegów">
+          Skrzynia biegów
+        </div>
+        <div class="col">
+          <img src="assets/samochodyIMG/icony/rok.png" class="img-fluid" alt="Rocznik">
+          Rok
+        </div>
+        <div class="col">
+          <img src="assets/samochodyIMG/icony/cena.png" class="img-fluid" alt="Cena">
+          Cena
+        </div>
+
+
+      </div>
+
+
+    </div>
+  </div>
 </div>
