@@ -1,38 +1,10 @@
-<!--<p>samochody works!</p>-->
-<!--<div class="container" style="margin-left: 0;">-->
-<!--  <table class="table table-hover">-->
-<!--    <thead class="thead-dark">-->
-<!--    <tr>-->
-<!--      <th>ID</th>-->
-<!--      <th>Imie</th>-->
-<!--      <th>Nazwisko</th>-->
-<!--      <th>NIP</th>-->
-<!--      <th>Nr_Telefonu</th>-->
-<!--    </tr>-->
-<!--    </thead>-->
-<!--    <tbody>-->
-<!--    <tr *ngFor="let item of samochody">-->
-<!--      <td>{{item.ID_SAMOCHODU}}</td>-->
-<!--      <td>{{item.ID_LOKALU}}</td>-->
-<!--      <td>{{item.MARKA}}</td>-->
-<!--      <td>{{item.MODEL}}</td>-->
-<!--      <td>{{item.ROK}}</td>-->
-<!--      <td>{{item.KOLOR}}</td>-->
-<!--      <td>{{item.ILOSC_MIEJSC}}</td>-->
-<!--      <td>{{item.POJEMNOSC_BAGAZNIKA}}</td>-->
-<!--      <td>{{item.RODZAJ_SKRZYNI_BIEGOW}}</td>-->
-<!--      <td>{{item.CENA_ZA_DZIEN}}</td>-->
-<!--    </tr>-->
-<!--    </tbody>-->
-<!--  </table>-->
-<!--</div>-->
 
 
-<div *ngFor="let item of samochody" class="container" style="margin-bottom: 30px">
+<div *ngFor="let item of samochody" class="container shadow-lg p-3 mb-5 bg-white rounded" style="margin-bottom: 30px">
   <!--WIERSZ SAMOCHODÓW-->
   <div class="row">
 
-    <div class="col-lg-6">
+    <div class="col-lg-6 text-center">
       <!--POJEMNIK NA ZJĘCIA-->
       <img src="../../assets/samochodyIMG/samochodyPhotos/{{item.MARKA}}{{item.MODEL}}.jpg" class="img-fluid" alt="Samochod">
     </div>
@@ -40,33 +12,33 @@
     <div class="col-lg-6 mx-auto "><!-- POJEMNIK NA DANE SAMOCHODÓW-->
 
       <div class="row " style="margin-bottom: 10px;">
-        <div class="col text-right">
+        <div class="col-5 text-right">
           <h3>
             {{item.MARKA}}
           </h3>
         </div>
-        <div class="col">
+        <div class="col-7">
           <h3>
             {{item.MODEL}}
           </h3>
         </div>
       </div>
       <div class="row align-middle" style="margin-bottom: 10px;">
-        <div class="col-md-4">
+        <div class="col-4">
           <img src="assets/samochodyIMG/icony/siedzenie.png" class="img-fluid" alt="Ilość Miejsc">
           {{item.ILOSC_MIEJSC}}
         </div>
-        <div class="col-md-4">
+        <div class="col-4">
           <img src="assets/samochodyIMG/icony/bagaz.png" class="img-fluid" alt="Pojemność bagażnika">
           {{item.POJEMNOSC_BAGAZNIKA}}
         </div>
-        <div class="col-md-4">
+        <div class="col-4">
           <img src="assets/samochodyIMG/icony/kolor.png" class="img-fluid" alt="Kolor">
           {{item.KOLOR}}
         </div>
       </div>
       <div class="row">
-        <div class="col-md-4 ">
+        <div class="col-4 ">
           <div *ngIf="item.RODZAJ_SKRZYNI_BIEGOW=='M'; else elseBlock">
             <img src="assets/samochodyIMG/icony/manual.png" class="img-fluid" alt="Manual">
             Manual
@@ -77,11 +49,11 @@
           </ng-template>
 
         </div>
-        <div class="col-md-4">
+        <div class="col-4">
           <img src="assets/samochodyIMG/icony/rok.png" class="img-fluid" alt="Rocznik">
           {{item.ROK}}
         </div>
-        <div class="col-md-4">
+        <div class="col-4">
           <img src="assets/samochodyIMG/icony/cena.png" class="img-fluid" alt="Cena">
           {{item.CENA_ZA_DZIEN}}
         </div>
@@ -92,4 +64,11 @@
 
     </div>
   </div>
+
+
+<!--  BUTTON  -->
+  <div class="col text-right" style="padding-top: 10px;" >
+  <button type="button" class="btn btn-danger">Zobacz Ofertę</button>
+  </div>
+
 </div>
