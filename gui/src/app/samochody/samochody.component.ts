@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import {Samochody} from "./samochody";
-import {SamochodyService} from "./samochody.service";
+import {Component, OnInit} from '@angular/core';
+import {Samochody} from "../interfaceBazyDanych/samochody";
+import {SamochodyService} from "../services/samochody.service";
+import {MessagesService} from "../messages/messages.service";
 
 @Component({
   selector: 'app-samochody',
@@ -9,27 +10,23 @@ import {SamochodyService} from "./samochody.service";
 })
 export class SamochodyComponent implements OnInit {
   samochody: Samochody[];
-  error = '';
-  succes = '';
 
 
-  constructor(private samochodyService: SamochodyService) {
-
+  constructor(
+    private samochodyService: SamochodyService,
+    private messageService: MessagesService
+  ) {
   }
+
 
   ngOnInit(): void {
     this.getSamochody();
   }
 
   getSamochody(): void{
-    this.samochodyService.getAll().subscribe(
-      (res: Samochody[]) => {
-        this.samochody = res;
-      },
-      (error) =>{
-        this.error = error;
-      }
-    );
+    this.samochodyService.getSamochody().subscribe(samochody => this.samochody = samochody);
   }
+
+
 
 }

@@ -1,12 +1,12 @@
 
 
-<div *ngFor="let item of samochody" class="container shadow-lg p-3 mb-5 bg-white rounded" style="margin-bottom: 30px">
+<div *ngFor="let samochod of samochody" class="container shadow-lg p-3 mb-5 bg-white rounded" style="margin-bottom: 30px">
   <!--WIERSZ SAMOCHODÓW-->
   <div class="row">
 
     <div class="col-lg-6 text-center">
       <!--POJEMNIK NA ZJĘCIA-->
-      <img src="../../assets/samochodyIMG/samochodyPhotos/{{item.MARKA}}{{item.MODEL}}.jpg" class="img-fluid" alt="Samochod">
+      <img src="../../assets/samochodyIMG/samochodyPhotos/{{samochod.MARKA}}{{samochod.MODEL}}.jpg" class="img-fluid" alt="Samochod">
     </div>
 
     <div class="col-lg-6 mx-auto "><!-- POJEMNIK NA DANE SAMOCHODÓW-->
@@ -14,32 +14,28 @@
       <div class="row " style="margin-bottom: 10px;">
         <div class="col text-center">
           <h3>
-            {{item.MARKA}} {{item.MODEL}}
+            {{samochod.MARKA}} {{samochod.MODEL}}
           </h3>
         </div>
-<!--        <div class="col-7" style="background-color: bisque">-->
-<!--          <h3>-->
-<!--            {{item.MODEL}}-->
-<!--          </h3>-->
-<!--        </div>-->
+
       </div>
       <div class="row align-middle" style="margin-bottom: 10px;">
         <div class="col-4">
           <img src="assets/samochodyIMG/icony/siedzenie.png" class="img-fluid" alt="Ilość Miejsc">
-          {{item.ILOSC_MIEJSC}}
+          {{samochod.ILOSC_MIEJSC}}
         </div>
         <div class="col-4">
           <img src="assets/samochodyIMG/icony/bagaz.png" class="img-fluid" alt="Pojemność bagażnika">
-          {{item.POJEMNOSC_BAGAZNIKA}}
+          {{samochod.POJEMNOSC_BAGAZNIKA}}
         </div>
         <div class="col-4">
           <img src="assets/samochodyIMG/icony/kolor.png" class="img-fluid" alt="Kolor">
-          {{item.KOLOR}}
+          {{samochod.KOLOR}}
         </div>
       </div>
       <div class="row">
         <div class="col-4 ">
-          <div *ngIf="item.RODZAJ_SKRZYNI_BIEGOW=='M'; else elseBlock">
+          <div *ngIf="samochod.RODZAJ_SKRZYNI_BIEGOW =='M'; else elseBlock">
             <img src="assets/samochodyIMG/icony/manual.png" class="img-fluid" alt="Manual">
             Manual
           </div>
@@ -51,11 +47,11 @@
         </div>
         <div class="col-4">
           <img src="assets/samochodyIMG/icony/rok.png" class="img-fluid" alt="Rocznik">
-          {{item.ROK}}
+          {{samochod.ROK}}
         </div>
         <div class="col-4">
           <img src="assets/samochodyIMG/icony/cena.png" class="img-fluid" alt="Cena">
-          {{item.CENA_ZA_DZIEN}}
+          {{samochod.CENA_ZA_DZIEN}}
         </div>
 
 
@@ -68,7 +64,7 @@
 
 <!--  BUTTON  -->
   <div class="col text-right" style="padding-top: 10px;" >
-  <button type="button" class="btn btn-danger">Zarezerwuj</button>
+    <button routerLink="/samochody/{{samochod.ID_SAMOCHODU}}" type="button" class="btn btn-danger">Zarezerwuj</button>
   </div>
 
 </div>
