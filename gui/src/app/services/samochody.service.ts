@@ -1,10 +1,12 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
-import {catchError, map, tap} from "rxjs/operators";
+import {catchError, filter, map, tap} from "rxjs/operators";
 import {Observable, of} from "rxjs";
 import {MessagesService} from "../messages/messages.service";
 import {Samochody} from "../interfaceBazyDanych/samochody";
 import {ObjectAssignBuiltinFn} from "@angular/compiler-cli/src/ngtsc/partial_evaluator/src/builtin";
+import {forEachComment} from "tslint";
+import {SamochodyComponent} from "../samochody/samochody.component";
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +19,8 @@ export class SamochodyService {
 
   private samochodyUrl = 'http://localhost/BD_2020_Kacper_Wysocki/backend/carList.php';
   samochody: Samochody[];
+  samochod: Samochody;
+  private tempSamochody: Observable<Samochody>;
 
   constructor(
     private http: HttpClient,
@@ -24,6 +28,10 @@ export class SamochodyService {
   ) {
   }
 
+  // TODO: zwracanie Observable<Samochody>
+  // getSamochod(ID_SAMOCHODU: number): Samochody {
+  //   return ID_SAMOCHODU;
+  // }
 
   getSamochody(): Observable<Samochody[]> {
     return this.http.get(this.samochodyUrl)

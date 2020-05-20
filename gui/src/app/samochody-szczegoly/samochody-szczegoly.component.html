@@ -1,2 +1,9 @@
 
-<h3>Samochod szczegóły działa}}</h3>
+
+
+
+<div *ngFor="let samochod of samochody">
+  <div *ngIf="samochod.ID_SAMOCHODU == getID()">
+    <h3>Szczegóły samochodu o ID: {{samochod.ID_SAMOCHODU}}</h3>
+  </div>
+</div>

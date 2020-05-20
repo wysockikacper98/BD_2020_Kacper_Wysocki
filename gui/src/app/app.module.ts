@@ -8,6 +8,9 @@ import { SamochodyComponent } from './samochody/samochody.component';
 import { AppRoutingModule } from './app-routing.module';
 import { SamochodySzczegolyComponent } from './samochody-szczegoly/samochody-szczegoly.component';
 import { MessagesComponent } from './messages/messages.component';
+import {FormsModule} from "@angular/forms";
+import { FilterComponent } from './filter/filter.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -16,11 +19,14 @@ import { MessagesComponent } from './messages/messages.component';
     SamochodyComponent,
     SamochodySzczegolyComponent,
     MessagesComponent,
+    FilterComponent,
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]
