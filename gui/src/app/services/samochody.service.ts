@@ -30,10 +30,10 @@ export class SamochodyService {
   };
   private rezerwacjaURL = 'http://localhost/BD_2020_Kacper_Wysocki/backend/rezerwacjaLista.php'
   private samochodyUrl = 'http://localhost/BD_2020_Kacper_Wysocki/backend/carList.php';
-  // private klientURL = 'http://localhost/BD_2020_Kacper_Wysocki/backend/getKlient.php';
+  private klientURL = 'http://localhost/BD_2020_Kacper_Wysocki/backend/getKlient.php';
   samochody: Samochody[];
   rezerwacja: Rezerwacja[];
-  // klient: Klienci;
+  klient: Klienci;
 
 
 
@@ -44,15 +44,17 @@ export class SamochodyService {
   ) {
   }
 
-  // getKlient(id: number):Observable<Klienci>{
-  //   return this.http.post(this.klientURL, id)
-  //     .pipe(
-  //       map((res) => {
-  //         this.klient = res['data'];
-  //         return this.klient;
-  //       })
-  //     )
-  // }
+  getKlient(id: number):Observable<Klienci>{
+    return this.http.post<Klienci>(this.klientURL, id)
+      .pipe(
+        map((res) => {
+          this.klient = res['data'];
+          return this.klient;
+        }),
+        tap(_ => this.log(`pobranie klienta o id= ${id}`)),
+        catchError(this.handleError<Klienci>('getKlient', ))
+      )
+  }
 
 
 getRezerwacja(): Observable<Rezerwacja[]>{

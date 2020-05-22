@@ -19,14 +19,15 @@ export class PracownikWydanieSamochoduComponent implements OnInit {
 
   ngOnInit(): void {
     this.getRezerwacja();
+    console.log(this.getKlient(6));
   }
 
   getRezerwacja(): void{
     this.samochodyService.getRezerwacja().subscribe(rezerwacja => this.rezerwacja = rezerwacja);
   }
 
-  // getKlient(id: number) {
-  //   this.samochodyService.getKlient(id).subscribe(klient => this.klient = klient);
-  // }
+  getKlient(id: number): void {
+    this.samochodyService.getKlient(id).subscribe(klient => this.klient = klient);
+  }
 
 }
