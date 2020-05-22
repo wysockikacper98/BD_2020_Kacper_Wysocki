@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {NgbDate, NgbCalendar, NgbDateParserFormatter} from "@ng-bootstrap/ng-bootstrap";
+import {SamochodyService} from "../services/samochody.service";
 
 @Component({
   selector: 'app-filter',
@@ -11,13 +12,16 @@ export class FilterComponent implements OnInit {
 
   fromDate: NgbDate | null = null;
   toDate: NgbDate | null = null;
+  //senging message
+  data: string;
 
   constructor(
-    private calendar: NgbCalendar,
-    public formatter: NgbDateParserFormatter
+    public calendar: NgbCalendar,
+    public formatter: NgbDateParserFormatter,
+    private samochodyService: SamochodyService
   ) {
     this.fromDate = calendar.getToday();
-    this.toDate = calendar.getNext(calendar.getToday(), 'd', 10);
+    this.toDate = calendar.getNext(calendar.getToday(), 'd', 3);
   }
 
   onDateSelection(date: NgbDate) {
@@ -49,6 +53,20 @@ export class FilterComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.samochodyService.currentFromData.subscribe(date => this.fromDate = date);
+    this.samochodyService.currentToData.subscribe(date => this.toDate = date);
+  }
+
+  changeFromDate(): void{
+    this.samochodyService.changeFromDate(this.fromDate)
+  }
+  changeToDate(): void{
+    this.samochodyService.changeToDate(this.toDate);
+  }
+
+  newDataSelected(): void{
+    this.changeToDate();
+    this.changeFromDate();
   }
 
 }

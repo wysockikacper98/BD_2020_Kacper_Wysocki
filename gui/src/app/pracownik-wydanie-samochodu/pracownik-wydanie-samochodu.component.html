@@ -1,0 +1,23 @@
+<table class="table">
+  <thead>
+  <tr>
+    <th scope="col">ID_REZERWACJI</th>
+    <th scope="col">Imie</th>
+    <th scope="col">Nazwisko</th>
+    <th scope="col">ID_SAMOCHODU</th>
+    <th scope="col">DATA_POCZATKU_WYPOZYCZENIA</th>
+    <th scope="col">DATA_KONCA_WYPOZYCZENIA</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let rezerwacja of rezerwacja">
+    <th scope="row">{{rezerwacja.ID_REZERWACJI}}</th>
+    <th scope="row">{{rezerwacja.ID_KLIENTA}}</th>
+    <th scope="row">{{rezerwacja.ID_SAMOCHODU}}</th>
+
+    <td>{{rezerwacja.DATA_POCZATKU_WYPOZYCZENIA}}</td>
+    <td>{{rezerwacja.DATA_KONCA_WYPOZYCZENIA}}</td>
+
+  </tr>
+  </tbody>
+</table>

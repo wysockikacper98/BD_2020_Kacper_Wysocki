@@ -1,4 +1,5 @@
-<div>
+
+<div> <!-- pojemnik na dataPickera-->
 
   <form class="form-inline">
     <div class="form-group hidden">
@@ -11,6 +12,7 @@
                (dateSelect)="onDateSelection($event)"
                [displayMonths]="2"
                [dayTemplate]="t"
+               [minDate]="calendar.getToday()"
                outsideDays="hidden"
                [startDate]="fromDate!">
         <ng-template #t let-date let-focused="focused">
@@ -51,8 +53,16 @@
     </div>
   </form>
 
+<!--  Wyświetlanie danych pobranych z datePickerów-->
   <hr/>
   <pre>From date model: {{ fromDate | json }}</pre>
   <pre>To date model: {{ toDate | json }}</pre>
 
 </div>
+<!--  BUTOON -->
+<div class="col text-right" style="padding-top: 10px;" >
+  <button routerLink="/samochody" (click)="newDataSelected()" type="button" class="btn btn-danger">Zatwierdź</button>
+</div>
+
+<h3>FromDate: {{fromDate | json}}</h3>
+<h3>ToDate: {{toDate | json}}</h3>
