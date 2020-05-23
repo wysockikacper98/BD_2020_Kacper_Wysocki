@@ -12,6 +12,7 @@ export class PracownikWydanieSamochoduComponent implements OnInit {
 
   rezerwacja: Rezerwacja[];
   klient: Klienci;
+  klienci: Klienci[];
 
   constructor(
     private samochodyService: SamochodyService
@@ -19,11 +20,16 @@ export class PracownikWydanieSamochoduComponent implements OnInit {
 
   ngOnInit(): void {
     this.getRezerwacja();
-    console.log(this.getKlient(6));
+    // this.getKlient(6);
+    this.getKlienci();
   }
 
   getRezerwacja(): void{
     this.samochodyService.getRezerwacja().subscribe(rezerwacja => this.rezerwacja = rezerwacja);
+  }
+
+  getKlienci(): void {
+    this.samochodyService.getKlienci().subscribe(klienci => this.klienci = klienci);
   }
 
   getKlient(id: number): void {

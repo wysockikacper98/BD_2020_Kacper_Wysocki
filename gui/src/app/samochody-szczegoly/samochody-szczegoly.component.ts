@@ -12,6 +12,7 @@ import {Location} from "@angular/common";
 export class SamochodySzczegolyComponent implements OnInit {
 
   samochody: Samochody[];
+  samochod: Samochody;
   wybranySamochod: number;
 
   constructor(

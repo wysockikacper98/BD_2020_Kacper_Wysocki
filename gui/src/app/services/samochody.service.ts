@@ -28,11 +28,17 @@ export class SamochodyService {
   httpOptions = {
     headers: new HttpHeaders({'Content-Type': 'application/json'})
   };
+
+
   private rezerwacjaURL = 'http://localhost/BD_2020_Kacper_Wysocki/backend/rezerwacjaLista.php'
   private samochodyUrl = 'http://localhost/BD_2020_Kacper_Wysocki/backend/carList.php';
   private klientURL = 'http://localhost/BD_2020_Kacper_Wysocki/backend/getKlient.php';
+  private klienciURL = 'http://localhost/BD_2020_Kacper_Wysocki/backend/klienciLista.php';
+  private samochodURL = 'http://localhost/BD_2020_Kacper_Wysocki/backend/getSamochod.php';
   samochody: Samochody[];
+  samochod: Samochody;
   rezerwacja: Rezerwacja[];
+  klienci: Klienci[];
   klient: Klienci;
 
 
@@ -54,6 +60,18 @@ export class SamochodyService {
         tap(_ => this.log(`pobranie klienta o id= ${id}`)),
         catchError(this.handleError<Klienci>('getKlient', ))
       )
+  }
+
+  getKlienci(): Observable<Klienci[]> {
+    return this.http.get<Klienci[]>(this.klienciURL)
+      .pipe(
+        map((res) => {
+          this.klienci = res['data'];
+          return this.klienci;
+        }),
+        tap(_ => this.log('Pobranie klientów')),
+        catchError(this.handleError<Klienci[]>('getKlienci', []))
+      );
   }
 
 

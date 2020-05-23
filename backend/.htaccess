@@ -1,7 +1,3 @@
-RewriteEngine On
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteRule ^([^\.]+)$ $1.php [NC,L]
-
 # Set the headers for the restful api
 Header always set Access-Control-Allow-Origin http://localhost:4200
 Header always set Access-Control-Max-Age "1000"

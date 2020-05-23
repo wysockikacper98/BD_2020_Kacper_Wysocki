@@ -2,8 +2,8 @@
 
 require 'connect.php';
 
-//$id_klienta = file_get_contents("php://input");
-$id_klienta = 6;
+$id_klienta = null;
+$id_klienta = file_get_contents("php://input");
 if (isset($id_klienta)) {
 
     $sql = "select * from KLIENCI

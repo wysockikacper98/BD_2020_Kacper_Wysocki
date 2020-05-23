@@ -1,26 +1,99 @@
-<table class="table">
-  <thead>
-  <tr>
-    <th scope="col">ID_REZERWACJI</th>
-    <th scope="col">Imie</th>
-    <th scope="col">Nazwisko</th>
-    <th scope="col">ID_SAMOCHODU</th>
-    <th scope="col">DATA_POCZATKU_WYPOZYCZENIA</th>
-    <th scope="col">DATA_KONCA_WYPOZYCZENIA</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr *ngFor="let rezerwacja of rezerwacja">
-    <th scope="row">{{rezerwacja.ID_REZERWACJI}}</th>
-    <th scope="row">{{rezerwacja.ID_KLIENTA}}</th>
+<!--<table class="table">-->
+<!--  <thead>-->
+<!--  <tr>-->
+<!--    <th scope="col">ID_REZERWACJI</th>-->
+<!--    <th scope="col">ID_KLIENTA</th>-->
+<!--    <th scope="col">Imie</th>-->
+<!--    <th scope="col">Nazwisko</th>-->
+<!--    <th scope="col">ID_SAMOCHODU</th>-->
+<!--    <th scope="col">DATA_POCZATKU_WYPOZYCZENIA</th>-->
+<!--    <th scope="col">DATA_KONCA_WYPOZYCZENIA</th>-->
+<!--  </tr>-->
+<!--  </thead>-->
+<!--  <tbody>-->
 
-<!--    <th scope="row">{{klient.IMIE}}</th>-->
-<!--    <th scope="row">{{klient.NAZWISKO}}</th>-->
-    <th scope="row">{{rezerwacja.ID_SAMOCHODU}}</th>
 
-    <td>{{rezerwacja.DATA_POCZATKU_WYPOZYCZENIA}}</td>
-    <td>{{rezerwacja.DATA_KONCA_WYPOZYCZENIA}}</td>
+<!--  <tr *ngFor="let rezerwacja of rezerwacja">-->
+<!--    <th scope="row">{{rezerwacja.ID_REZERWACJI}}</th>-->
+<!--    <th scope="row">{{rezerwacja.ID_KLIENTA}}</th>-->
 
-  </tr>
-  </tbody>
-</table>
+<!--    <span *ngFor="let klient of klienci" scope="row">-->
+<!--      <span *ngIf="klient.ID_KLIENTA == rezerwacja.ID_KLIENTA">-->
+<!--        <td scope="row">{{klient.IMIE}}</td>-->
+<!--        <td scope="row">{{klient.NAZWISKO}}</td>-->
+<!--      </span>-->
+<!--    </span>-->
+
+
+<!--    <th scope="row">{{rezerwacja.ID_SAMOCHODU}}</th>-->
+
+<!--    <td>{{rezerwacja.DATA_POCZATKU_WYPOZYCZENIA}}</td>-->
+<!--    <td>{{rezerwacja.DATA_KONCA_WYPOZYCZENIA}}</td>-->
+
+<!--  </tr>-->
+<!--  </tbody>-->
+<!--</table>-->
+
+
+<!--Table-->
+<div class="row">
+
+<!--  tabela z klientami-->
+  <div class="col">
+    <table class="table">
+      <!--Table head-->
+      <thead>
+      <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th></th>
+      </tr>
+      </thead>
+      <!--Table head-->
+      <!--Table body-->
+      <tbody>
+      <tr *ngFor="let klient of klienci">
+        <td>{{klient.IMIE}}</td>
+        <td>{{klient.NAZWISKO}}</td>
+        <td>
+          <button type="button" class="btn btn-outline-dark">Rezerwacje</button>
+        </td>
+      </tr>
+      </tbody>
+      <!--Table body-->
+    </table>
+    <!--Table-->
+  </div>
+
+  <div class="col">
+
+<!--    tabela z rezerwacjami -->
+    <table class="table">
+      <!--Table head-->
+      <thead>
+      <tr>
+        <th>ID_Samochodu</th>
+        <th>Data Początku</th>
+        <th>Data Końca</th>
+        <th></th>
+      </tr>
+      </thead>
+      <!--Table head-->
+      <!--Table body-->
+      <tbody>
+      <tr *ngFor="let rezerwacja of rezerwacja">
+        <td>{{rezerwacja.ID_SAMOCHODU}}</td>
+        <td>{{rezerwacja.DATA_POCZATKU_WYPOZYCZENIA}}</td>
+        <td>{{rezerwacja.DATA_KONCA_WYPOZYCZENIA}}</td>
+        <td>
+          <button type="button" class="btn btn-outline-dark">Info</button>
+        </td>
+
+      </tr>
+      </tbody>
+      <!--Table body-->
+    </table>
+    <!--Table-->
+  </div>
+
+</div>
