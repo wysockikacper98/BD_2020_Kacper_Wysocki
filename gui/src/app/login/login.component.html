@@ -1,4 +1,4 @@
-<div *ngIf="login">
+<div>
   <body class="text-center">
   <form class="form-signin">
 
@@ -8,21 +8,24 @@
 
     <input #haslo type="password" class="form-control" placeholder="Hasło"/>
 
-    <p *ngIf="alert == true" >Podano błędny login lub hasło</p>
 
     <button (click)="zaloguj(login.value, haslo.value); login.value = ''; haslo.value=''">
       logIn
     </button>
 
-    <!--  <button class="btn btn-lg btn-primary btn-block" routerLink="/pracownik-wydanie-samochodu" type="submit">Pracownik</button>-->
+<!--    PO PODANIU ODPOWIEDNICH DANYCH LOGOWANIA  -->
+    <div *ngIf="klient">
+
+      <button routerLink="/filter">Zalogowano na konto Klienta</button>
+
+      <!--  <app-filter></app-filter>-->
+    </div>
+    <div *ngIf="pracownik">
+      <button routerLink="/pracownik-wydanie-samochodu">Zalogowano na konto Pracownika</button>
+      <!--  <app-pracownik-odbior-samochodu></app-pracownik-odbior-samochodu>-->
+    </div>
+
+
   </form>
   </body>
-</div>
-
-
-<div *ngIf="klient">
-  <app-filter></app-filter>
-</div>
-<div *ngIf="pracownik">
-  <app-pracownik-odbior-samochodu></app-pracownik-odbior-samochodu>
 </div>

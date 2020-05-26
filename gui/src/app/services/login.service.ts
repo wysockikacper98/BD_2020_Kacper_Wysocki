@@ -18,7 +18,7 @@ export class LoginService {
   zalogowanyKlient: number = null;
   zalogowanyPracownik: number = null;
 
-  
+
 
   private passyKlientURL = 'http://localhost/BD_2020_Kacper_Wysocki/backend/getPassKlienci.php';
   private passyPracownikURL = 'http://localhost/BD_2020_Kacper_Wysocki/backend/getPassPracownicy.php';

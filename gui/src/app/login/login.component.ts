@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {PassKlient} from "../interfaceBazyDanych/pass-klient";
 import {PassPracownik} from "../interfaceBazyDanych/pass-pracownik";
 import {LoginService} from "../services/login.service";
+import {Klienci} from "../interfaceBazyDanych/klienci";
+import {Pracownicy} from "../interfaceBazyDanych/pracownicy";
 
 
 @Component({
@@ -14,11 +16,12 @@ export class LoginComponent implements OnInit {
   passyKlienci: PassKlient[];
   passyPracownicy: PassPracownik[];
 
+  zalogowanyKlient: Klienci;
+  zalogownayPracownik: Pracownicy;
+
   klient: boolean = false;
   pracownik: boolean = false;
 
-  login: boolean = true;
-  alert: boolean = null;
 
   constructor(private loginService: LoginService) { }
 
@@ -41,7 +44,7 @@ export class LoginComponent implements OnInit {
       if (klient.LOGIN == login) {
         if (klient.HASLO == haslo) {
           this.klient = true;
-          this.login = false;
+          this.pracownik = false;
           this.loginService.zalogowanyJakoKlient(klient.ID_KLIENTA);
         }
       }
@@ -52,7 +55,7 @@ export class LoginComponent implements OnInit {
       if (pracownik.LOGIN == login) {
         if (pracownik.HASLO == haslo) {
           this.pracownik =  true;
-          this.login = false;
+          this.klient = false;
           this.loginService.zalogowanoJakoPracownik(pracownik.ID_PRACOWNIKA);
         }
       }
