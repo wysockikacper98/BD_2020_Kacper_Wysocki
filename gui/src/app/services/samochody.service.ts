@@ -35,6 +35,7 @@ export class SamochodyService {
   private klientURL = 'http://localhost/BD_2020_Kacper_Wysocki/backend/getKlient.php';
   private klienciURL = 'http://localhost/BD_2020_Kacper_Wysocki/backend/klienciLista.php';
   private samochodURL = 'http://localhost/BD_2020_Kacper_Wysocki/backend/getSamochod.php';
+
   samochody: Samochody[];
   samochod: Samochody;
   rezerwacja: Rezerwacja[];

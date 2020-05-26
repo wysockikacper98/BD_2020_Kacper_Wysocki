@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {MessagesService} from "./messages.service";
+import {SamochodyService} from "../services/samochody.service";
+import {LoginService} from "../services/login.service";
 
 @Component({
   selector: 'app-messages',
@@ -8,9 +10,19 @@ import {MessagesService} from "./messages.service";
 })
 export class MessagesComponent implements OnInit {
 
-  constructor(public messageService: MessagesService) { }
+  zalogowanyKlient: number = null;
+  zalogowanyPracownik: number = null;
+
+  constructor(public messageService: MessagesService,
+              public loginService: LoginService) { }
 
   ngOnInit(): void {
+    this.getZalogowany();
+  }
+
+  getZalogowany() {
+    this.zalogowanyKlient = this.loginService.zalogowanyKlient;
+    this.zalogowanyPracownik = this.loginService.zalogowanyPracownik;
   }
 
 }
