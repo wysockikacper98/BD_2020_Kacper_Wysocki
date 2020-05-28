@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {SamochodyService} from "../services/samochody.service";
 import {Rezerwacja} from "../interfaceBazyDanych/rezerwacja";
 import {Klienci} from "../interfaceBazyDanych/klienci";
+import {RezerwacjeService} from "../services/rezerwacje.service";
 
 @Component({
   selector: 'app-pracownik-wydanie-samochodu',
@@ -15,7 +16,8 @@ export class PracownikWydanieSamochoduComponent implements OnInit {
   klienci: Klienci[];
 
   constructor(
-    private samochodyService: SamochodyService
+    private samochodyService: SamochodyService,
+    private rezerwacjeService: RezerwacjeService,
   ) { }
 
   ngOnInit(): void {
@@ -25,7 +27,7 @@ export class PracownikWydanieSamochoduComponent implements OnInit {
   }
 
   getRezerwacja(): void{
-    this.samochodyService.getRezerwacja().subscribe(rezerwacja => this.rezerwacja = rezerwacja);
+    this.rezerwacjeService.getRezerwacja().subscribe(rezerwacja => this.rezerwacja = rezerwacja);
   }
 
   getKlienci(): void {

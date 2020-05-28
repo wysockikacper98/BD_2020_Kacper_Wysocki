@@ -4,6 +4,7 @@ import {SamochodyService} from "../services/samochody.service";
 import {ActivatedRoute} from "@angular/router";
 import {Location} from "@angular/common";
 import {NgbDate} from "@ng-bootstrap/ng-bootstrap";
+import {LoginService} from "../services/login.service";
 
 @Component({
   selector: 'app-samochody-szczegoly',
@@ -15,19 +16,19 @@ export class SamochodySzczegolyComponent implements OnInit {
   samochody: Samochody[];
 
   wybranySamochod: number;
-  cena: number;
+  cena: number = 0;
   kosztaWynajmu: number;
 
   fromDate: NgbDate | null = null;
   toDate: NgbDate | null = null;
 
-  tempFromDate: NgbDate;
-  temptoDate: NgbDate;
+  zalogowanyKlient: number;
+
 
   constructor(
     private samochodyService: SamochodyService,
     private route: ActivatedRoute,
-    private location: Location
+    private loginService: LoginService,
   ) {
   }
 
@@ -36,6 +37,8 @@ export class SamochodySzczegolyComponent implements OnInit {
     //pobieranie daty
     this.samochodyService.currentFromData.subscribe(date => this.fromDate = date);
     this.samochodyService.currentToData.subscribe(date => this.toDate = date);
+    this.loginService.currentKlient.subscribe(id => this.zalogowanyKlient = id);
+
   }
 
   getSamochody(): void {
@@ -46,19 +49,12 @@ export class SamochodySzczegolyComponent implements OnInit {
     return this.wybranySamochod = +this.route.snapshot.paramMap.get('ID_SAMOCHODU');
   }
 
-  // getSamochod(): void{
-  //   const id = +this.route.snapshot.paramMap.get('ID_SAMOCHODU');
-  //   this.samochodyService.getSamochod(id).subscribe(samochod => this.samochod = samochod);
-  // }
 
-  getKoszta(koszt: number): void {
+  getKoszta(koszt: number): number {
     const fromDate: Date = this.createDateFromMgbDate(this.fromDate);
     const toDate: Date = this.createDateFromMgbDate(this.toDate);
     const daysDiff = Math.floor(Math.abs(<any>fromDate - <any>toDate) / (1000 * 60 * 60 * 24)) + 1;
-
-    console.log(daysDiff)
-    console.log(daysDiff * koszt)
-    this.kosztaWynajmu = daysDiff * koszt;
+    return daysDiff * koszt;
   }
 
   createDateFromMgbDate(ngbDate: NgbDate): Date {
@@ -68,16 +64,20 @@ export class SamochodySzczegolyComponent implements OnInit {
 
 
   getData(data: NgbDate) {
-    console.log("Wywołanie funcji GetData")
     if (data.month < 10) {
-      return data.day.toString() + ":0" + data.month.toString() + ":" + data.year.toString()
+      if (data.day < 10) {
+        return "0" + data.day.toString() + ":0" + data.month.toString() + ":" + data.year.toString();
+      } else
+        return data.day.toString() + ":0" + data.month.toString() + ":" + data.year.toString();
     } else {
+      if(data.day<10)
+        return "0"+data.day.toString() + ":" + data.month.toString() + ":" + data.year.toString()
       return data.day.toString() + ":" + data.month.toString() + ":" + data.year.toString()
     }
   }
 
-  setCena(cena: number) {
-    this.cena = cena;
-  }
 
+  addRezerwacja(ID_SAMOCHODU: number) {
+    console.log("wykonało sie addRezerwacja");
+  }
 }
