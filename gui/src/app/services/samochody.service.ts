@@ -74,7 +74,7 @@ export class SamochodyService {
         catchError(this.handleError<Klienci[]>('getKlienci', []))
       );
   }
-
+  
 
 getRezerwacja(): Observable<Rezerwacja[]>{
     return this.http.get(this.rezerwacjaURL)

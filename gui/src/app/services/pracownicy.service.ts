@@ -37,7 +37,6 @@ export class PracownicyService {
   private log(message: string) {
     this.messageService.add(`SamochodyService: ${message}`);
   }
-
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       console.error(error); // log to console instead

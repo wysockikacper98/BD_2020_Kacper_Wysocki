@@ -18,10 +18,14 @@
       <!--      </li>-->
 
     </ul>
-    <form class="form-inline my-2 my-lg-1">
+    <form *ngIf="zalogowanyKlient == null && zalogownayPracownik == null" class="form-inline my-2 my-lg-1">
       <a class="btn btn-dark" routerLink="/login" role="button">Zaloguj</a>
-      <a class="btn btn-dark" href="#" role="button">Zarejestruj</a>
+<!--      <a class="btn btn-dark" href="#" role="button">Zarejestruj</a>-->
     </form>
+
+    <button *ngIf="zalogowanyKlient != null" type="button" class="btn btn-dark">Zalogowano jako Klient o id: {{zalogowanyKlient}}</button>
+    <button *ngIf="zalogownayPracownik != null" type="button" class="btn btn-dark">Zalogowano jako Pracownik o id: {{zalogownayPracownik}}</button>
+    <a class="btn btn-dark" routerLink="/login" role="button" (click)="wyloguj()">Wyloguj</a>
 
   </div>
 </nav>

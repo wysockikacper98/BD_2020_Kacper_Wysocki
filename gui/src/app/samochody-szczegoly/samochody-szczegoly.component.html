@@ -1,9 +1,91 @@
-
-
-
+<!--<div *ngFor="let samochod of samochody">-->
+<!--  <div *ngIf="samochod.ID_SAMOCHODU == getID()">-->
+<!--    <h3>Szczegóły samochodu o ID: {{samochod.ID_SAMOCHODU}}</h3>-->
+<!--  </div>-->
+<!--</div>-->
 
 <div *ngFor="let samochod of samochody">
-  <div *ngIf="samochod.ID_SAMOCHODU == getID()">
-    <h3>Szczegóły samochodu o ID: {{samochod.ID_SAMOCHODU}}</h3>
+  <div *ngIf="samochod.ID_SAMOCHODU == getID()" class="row">
+
+    <div class="col-lg-6 text-center">
+      <!--POJEMNIK NA ZJĘCIA-->
+      <img src="../../assets/samochodyIMG/samochodyPhotos/{{samochod.MARKA}}{{samochod.MODEL}}.jpg" class="img-fluid"
+           alt="Samochod">
+    </div>
+
+    <div class="col-lg-6 mx-auto "><!-- POJEMNIK NA DANE SAMOCHODÓW-->
+
+      <div class="row " style="margin-bottom: 10px;">
+        <div class="col text-center">
+          <h3>
+            {{samochod.MARKA}} {{samochod.MODEL}}
+          </h3>
+        </div>
+
+      </div>
+      <div class="row align-middle" style="margin-bottom: 10px;">
+        <div class="col-4">
+          <img src="assets/samochodyIMG/icony/siedzenie.png" class="img-fluid" alt="Ilość Miejsc">
+          {{samochod.ILOSC_MIEJSC}}
+        </div>
+        <div class="col-4">
+          <img src="assets/samochodyIMG/icony/bagaz.png" class="img-fluid" alt="Pojemność bagażnika">
+          {{samochod.POJEMNOSC_BAGAZNIKA}}
+        </div>
+        <div class="col-4">
+          <img src="assets/samochodyIMG/icony/kolor.png" class="img-fluid" alt="Kolor">
+          {{samochod.KOLOR}}
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-4 ">
+          <div *ngIf="samochod.RODZAJ_SKRZYNI_BIEGOW =='M'; else elseBlock">
+            <img src="assets/samochodyIMG/icony/manual.png" class="img-fluid" alt="Manual">
+            Manual
+          </div>
+          <ng-template #elseBlock>
+            <img src="assets/samochodyIMG/icony/automat.png" class="img-fluid" alt="Automat">
+            Automat
+          </ng-template>
+
+        </div>
+        <div class="col-4">
+          <img src="assets/samochodyIMG/icony/rok.png" class="img-fluid" alt="Rocznik">
+          {{samochod.ROK}}
+        </div>
+        <div class="col-4">
+          <img src="assets/samochodyIMG/icony/cena.png" class="img-fluid" alt="Cena">
+          {{samochod.CENA_ZA_DZIEN}}{{setCena(samochod.CENA_ZA_DZIEN)}}
+        </div>
+
+
+      </div>
+    </div>
+
   </div>
+</div>
+
+<div style="margin-top: 100px"> <!--  Podsumowanie    -->
+  <h1>Podsumowanie</h1>
+  <div class="row container-fluid" >
+    <h2 class="col-6 font-italic font-weight-light">Data wynajmu</h2>
+    <h2 class="col-6 font-italic text-right font-weight-light">{{getData(fromDate)}} - {{getData(toDate)}}</h2>
+  </div>
+  <div class="row container-fluid" >
+    <h2 class="col-6 font-italic font-weight-light">Wynajem auta</h2>
+    <h2 class="col-6 font-italic text-right font-weight-light">{{getKoszta(cena)}}</h2>
+  </div>
+
+  <div class="row container-fluid" >
+    <h2 class="col-6 font-italic font-weight-light">Kaucja zwrotna</h2>
+    <h2 class="col-6 font-italic text-right font-weight-light">0 zł</h2>
+  </div>
+
+  <div class="row container-fluid" >
+    <h2 class="col-6 font-italic font-weight-light">Opłaty dodatkowe</h2>
+    <h2 class="col-6 font-italic text-right font-weight-light">50 zł</h2>
+  </div>
+
+  <button>Zarezerwuj</button>
+
 </div>

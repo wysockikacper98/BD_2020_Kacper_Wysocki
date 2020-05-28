@@ -15,7 +15,7 @@ const routers: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'pracownik-odbior-samochodu', component: PracownikOdbiorSamochoduComponent},
   {path: 'pracownik-wydanie-samochodu', component: PracownikWydanieSamochoduComponent},
-  {path: '', redirectTo: '/filter', pathMatch: 'full'}
+  {path: '', redirectTo: '/login', pathMatch: 'full'}
 ]
 
 

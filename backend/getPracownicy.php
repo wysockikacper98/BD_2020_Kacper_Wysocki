@@ -14,6 +14,7 @@ if (oci_execute($stdi)) {
         $pracownicy[$cr]['IMIE'] = $row['IMIE'];
         $pracownicy[$cr]['NAZWISKO'] = $row['NAZWISKO'];
         $pracownicy[$cr]['ZAROBKI'] = $row['ZAROBKI'];
+        $cr++;
     }
     echo json_encode(['data' => $pracownicy]);
 }else{

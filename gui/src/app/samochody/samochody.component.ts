@@ -4,6 +4,7 @@ import {SamochodyService} from "../services/samochody.service";
 import {MessagesService} from "../messages/messages.service";
 import {FilterComponent} from "../filter/filter.component";
 import {NgbDate} from "@ng-bootstrap/ng-bootstrap";
+import {LoginService} from "../services/login.service";
 
 
 @Component({
@@ -16,9 +17,12 @@ export class SamochodyComponent implements OnInit {
   fromDate: NgbDate | null = null;
   toDate: NgbDate | null = null;
 
+  zalogownyKlient: number;
+
   constructor(
     private samochodyService: SamochodyService,
     private messageService: MessagesService,
+    private loginService: LoginService,
   ) {
   }
 
@@ -27,6 +31,7 @@ export class SamochodyComponent implements OnInit {
     this.getSamochody();
     this.samochodyService.currentFromData.subscribe(date => this.fromDate = date);
     this.samochodyService.currentToData.subscribe(date => this.toDate = date);
+    this.loginService.currentKlient.subscribe(klientID => this.zalogownyKlient = klientID);
   }
 
   getSamochody(): void{

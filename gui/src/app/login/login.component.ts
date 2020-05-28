@@ -4,6 +4,7 @@ import {PassPracownik} from "../interfaceBazyDanych/pass-pracownik";
 import {LoginService} from "../services/login.service";
 import {Klienci} from "../interfaceBazyDanych/klienci";
 import {Pracownicy} from "../interfaceBazyDanych/pracownicy";
+import {PracownicyService} from "../services/pracownicy.service";
 
 
 @Component({
@@ -16,8 +17,8 @@ export class LoginComponent implements OnInit {
   passyKlienci: PassKlient[];
   passyPracownicy: PassPracownik[];
 
-  zalogowanyKlient: Klienci;
-  zalogownayPracownik: Pracownicy;
+  zalogowanyKlient: number;
+  zalogownayPracownik: number;
 
   klient: boolean = false;
   pracownik: boolean = false;
@@ -28,6 +29,8 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     this.getPassyKlient();
     this.getPassyPracownicy();
+    this.loginService.currentKlient.subscribe(id => this.zalogowanyKlient = id);
+    this.loginService.currnetPracownick.subscribe(id => this.zalogownayPracownik = id);
 
   }
 

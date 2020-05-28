@@ -17,12 +17,7 @@ export class MessagesComponent implements OnInit {
               public loginService: LoginService) { }
 
   ngOnInit(): void {
-    this.getZalogowany();
   }
 
-  getZalogowany() {
-    this.zalogowanyKlient = this.loginService.zalogowanyKlient;
-    this.zalogowanyPracownik = this.loginService.zalogowanyPracownik;
-  }
 
 }

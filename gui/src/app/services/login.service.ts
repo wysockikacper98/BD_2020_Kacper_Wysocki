@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Observable, of} from "rxjs";
+import {BehaviorSubject, Observable, of} from "rxjs";
 import {PassKlient} from "../interfaceBazyDanych/pass-klient";
 import {catchError, map, tap} from "rxjs/operators";
 import {PassPracownik} from "../interfaceBazyDanych/pass-pracownik";
@@ -15,9 +15,11 @@ export class LoginService {
   *    w ten sposób można było by przekazwyać informacje dotyczące kto dokonał jakiej operacji oraz
   *   łatwiej wysyłać te informacje do bazdy danych
   */
-  zalogowanyKlient: number = null;
-  zalogowanyPracownik: number = null;
+  private zalogowanyKlient = new BehaviorSubject<number>(null);
+  private zalogowanyPracownik = new BehaviorSubject<number>(null);
 
+  currentKlient = this.zalogowanyKlient.asObservable();
+  currnetPracownick = this.zalogowanyPracownik.asObservable();
 
 
   private passyKlientURL = 'http://localhost/BD_2020_Kacper_Wysocki/backend/getPassKlienci.php';
@@ -55,11 +57,13 @@ export class LoginService {
   }
 
   zalogowanoJakoPracownik(id: number) {
-    this.zalogowanyPracownik = id;
+    this.zalogowanyPracownik.next(id);
+    this.zalogowanyKlient.next(null);
   }
 
   zalogowanyJakoKlient(id: number) {
-    this.zalogowanyKlient = id;
+    this.zalogowanyKlient.next(id);
+    this.zalogowanyPracownik.next(null);
   }
 
 
