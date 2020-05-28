@@ -10,11 +10,6 @@ import {MessagesService} from "../messages/messages.service";
   providedIn: 'root'
 })
 export class LoginService {
-  /* TODO: gobalne zmienne przechowujące informacje na temat obecnie zalogowanego użytkownika
-  *   najlepiej jakby zmienne zalogowany klient / pracownik przechowywało obiekt pracownika/klienta
-  *    w ten sposób można było by przekazwyać informacje dotyczące kto dokonał jakiej operacji oraz
-  *   łatwiej wysyłać te informacje do bazdy danych
-  */
   private zalogowanyKlient = new BehaviorSubject<number>(null);
   private zalogowanyPracownik = new BehaviorSubject<number>(null);
 

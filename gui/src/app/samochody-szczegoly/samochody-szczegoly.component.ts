@@ -5,6 +5,8 @@ import {ActivatedRoute} from "@angular/router";
 import {Location} from "@angular/common";
 import {NgbDate} from "@ng-bootstrap/ng-bootstrap";
 import {LoginService} from "../services/login.service";
+import {Rezerwacja} from "../interfaceBazyDanych/rezerwacja";
+import {RezerwacjeService} from "../services/rezerwacje.service";
 
 @Component({
   selector: 'app-samochody-szczegoly',
@@ -16,8 +18,6 @@ export class SamochodySzczegolyComponent implements OnInit {
   samochody: Samochody[];
 
   wybranySamochod: number;
-  cena: number = 0;
-  kosztaWynajmu: number;
 
   fromDate: NgbDate | null = null;
   toDate: NgbDate | null = null;
@@ -29,6 +29,7 @@ export class SamochodySzczegolyComponent implements OnInit {
     private samochodyService: SamochodyService,
     private route: ActivatedRoute,
     private loginService: LoginService,
+    private rezerwacjeService: RezerwacjeService,
   ) {
   }
 
@@ -70,14 +71,32 @@ export class SamochodySzczegolyComponent implements OnInit {
       } else
         return data.day.toString() + ":0" + data.month.toString() + ":" + data.year.toString();
     } else {
-      if(data.day<10)
-        return "0"+data.day.toString() + ":" + data.month.toString() + ":" + data.year.toString()
+      if (data.day < 10)
+        return "0" + data.day.toString() + ":" + data.month.toString() + ":" + data.year.toString()
       return data.day.toString() + ":" + data.month.toString() + ":" + data.year.toString()
     }
   }
 
-
+  //TODO: Nie działa nawet wywołanie pliku PHP'a, ale plik PHP działa i wpisuje dane z obiektu json
   addRezerwacja(ID_SAMOCHODU: number) {
-    console.log("wykonało sie addRezerwacja");
+    const rezerwacja: Rezerwacja = new class implements Rezerwacja {
+      DATA_KONCA_WYPOZYCZENIA: NgbDate;
+      DATA_POCZATKU_WYPOZYCZENIA: NgbDate;
+      ID_KLIENTA: number;
+      ID_REZERWACJI: number;
+      ID_SAMOCHODU: number;
+    };
+
+    rezerwacja.ID_REZERWACJI = 3;
+    rezerwacja.ID_SAMOCHODU = ID_SAMOCHODU;
+    rezerwacja.ID_KLIENTA = this.zalogowanyKlient;
+    rezerwacja.DATA_POCZATKU_WYPOZYCZENIA = this.fromDate;
+    rezerwacja.DATA_KONCA_WYPOZYCZENIA = this.toDate;
+    if (rezerwacja.ID_REZERWACJI != null && rezerwacja.ID_KLIENTA != null && rezerwacja.ID_SAMOCHODU != null) {
+      console.log("Przed dodaniem rezerwacji");
+      this.rezerwacjeService.addRezerwacja(rezerwacja);
+    } else {
+      console.log("nie podano wszystkich danych do utworzenia rezerwacji")
+    }
   }
 }

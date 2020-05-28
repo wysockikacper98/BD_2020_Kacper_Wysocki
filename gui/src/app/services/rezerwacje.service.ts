@@ -22,11 +22,10 @@ export class RezerwacjeService {
   ) {
   }
 
-  addRezerwacja(rezerwacja: Rezerwacja): Observable<Rezerwacja[]> {
-    return this.http.post(this.addRezerwacjeURL, {data: rezerwacja})
+  addRezerwacja(rezerwacja: Rezerwacja) {
+    this.http.post(this.addRezerwacjeURL, {data: rezerwacja})
       .pipe(map((res) => {
           this.rezerwacje.push(res['data']);
-          return this.rezerwacje;
         }),
         tap(_ => this.log('dodanie rezerwacji')),
         catchError(this.handleError<Rezerwacja[]>('addRezerwacja', []))
