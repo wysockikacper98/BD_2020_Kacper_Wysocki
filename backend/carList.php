@@ -3,7 +3,7 @@
 require 'connect.php';
 
 $samochody = [];
-$sql = "SELECT * FROM SAMOCHODY";
+$sql = "SELECT * FROM SAMOCHODY ORDER BY ID_SAMOCHODU";
 
 $stid = oci_parse($con, $sql);
 oci_execute($stid);

@@ -1,99 +1,95 @@
-<!--<table class="table">-->
-<!--  <thead>-->
-<!--  <tr>-->
-<!--    <th scope="col">ID_REZERWACJI</th>-->
-<!--    <th scope="col">ID_KLIENTA</th>-->
-<!--    <th scope="col">Imie</th>-->
-<!--    <th scope="col">Nazwisko</th>-->
-<!--    <th scope="col">ID_SAMOCHODU</th>-->
-<!--    <th scope="col">DATA_POCZATKU_WYPOZYCZENIA</th>-->
-<!--    <th scope="col">DATA_KONCA_WYPOZYCZENIA</th>-->
-<!--  </tr>-->
-<!--  </thead>-->
-<!--  <tbody>-->
 
-
-<!--  <tr *ngFor="let rezerwacja of rezerwacja">-->
-<!--    <th scope="row">{{rezerwacja.ID_REZERWACJI}}</th>-->
-<!--    <th scope="row">{{rezerwacja.ID_KLIENTA}}</th>-->
-
-<!--    <span *ngFor="let klient of klienci" scope="row">-->
-<!--      <span *ngIf="klient.ID_KLIENTA == rezerwacja.ID_KLIENTA">-->
-<!--        <td scope="row">{{klient.IMIE}}</td>-->
-<!--        <td scope="row">{{klient.NAZWISKO}}</td>-->
-<!--      </span>-->
-<!--    </span>-->
-
-
-<!--    <th scope="row">{{rezerwacja.ID_SAMOCHODU}}</th>-->
-
-<!--    <td>{{rezerwacja.DATA_POCZATKU_WYPOZYCZENIA}}</td>-->
-<!--    <td>{{rezerwacja.DATA_KONCA_WYPOZYCZENIA}}</td>-->
-
-<!--  </tr>-->
-<!--  </tbody>-->
-<!--</table>-->
-
-
-<!--Table-->
-<div class="row">
-
-<!--  tabela z klientami-->
-  <div class="col">
-    <table class="table">
-      <!--Table head-->
-      <thead>
-      <tr>
-        <th>First Name</th>
-        <th>Last Name</th>
-        <th></th>
-      </tr>
-      </thead>
-      <!--Table head-->
-      <!--Table body-->
-      <tbody>
-      <tr *ngFor="let klient of klienci">
-        <td>{{klient.IMIE}}</td>
-        <td>{{klient.NAZWISKO}}</td>
-        <td>
-          <button type="button" class="btn btn-outline-dark">Rezerwacje</button>
-        </td>
-      </tr>
-      </tbody>
-      <!--Table body-->
-    </table>
-    <!--Table-->
+<div class = "row" style="margin-bottom: 30px">
+  <div class="col-6 text-center">
+    <button type="button" class="btn btn-outline-dark" (click)="openHTML(1)">Rezerwacje</button>
   </div>
-
-  <div class="col">
-
-<!--    tabela z rezerwacjami -->
-    <table class="table">
-      <!--Table head-->
-      <thead>
-      <tr>
-        <th>ID_Samochodu</th>
-        <th>Data Początku</th>
-        <th>Data Końca</th>
-        <th></th>
-      </tr>
-      </thead>
-      <!--Table head-->
-      <!--Table body-->
-      <tbody>
-      <tr *ngFor="let rezerwacja of rezerwacja">
-        <td>{{rezerwacja.ID_SAMOCHODU}}</td>
-        <td>{{rezerwacja.DATA_POCZATKU_WYPOZYCZENIA}}</td>
-        <td>{{rezerwacja.DATA_KONCA_WYPOZYCZENIA}}</td>
-        <td>
-          <button type="button" class="btn btn-outline-dark">Info</button>
-        </td>
-
-      </tr>
-      </tbody>
-      <!--Table body-->
-    </table>
-    <!--Table-->
+  <div class="col-6 text-center">
+    <button type="button" class="btn btn-outline-dark" (click)="openHTML(2)">Odbiór samochodów</button>
   </div>
 
 </div>
+<!--Aktywne Rezerwacje (klucze do wydania )-->
+<!--TODO: po naciśnięciu klawisz wyświetla sie lista aktywnych rezerwacji,
+          -wyświetlenie listy sktywnych samochodów oczekujących na odbiór
+          -przejscie do potwierdzenia wydania kluczy,
+          -dodanie do WYDANIE_SAMOCHODU odpowiedniego rekordu-->
+<div *ngIf="htmlRezerwacje">
+  <h1>Lista aktywnych rezerwacji</h1>
+  <h4>przejście do wydanie samochodu</h4>
+</div>
+<!--Samochody oczekujące na zakończenie wypożyczenia (klucze do odebrania)-->
+<!--TODO: po naciśnięcu przycisku przechodzimy do listy samochodów poza salonem będąchych w rękach klientów
+          - wyświetlenie listy samochodów poza lokalem
+          - przejście do potwierdzenia odbioru
+          - dodanie wpisu dotyczącego rezerwacji
+          - dodawnie odpowiedniego wpisu do tabeli WYPOZYCZENIE-->
+<div *ngIf="htmlOdbior">
+  <h1>Lista wydanych samochodów</h1>
+  <h4>przejscie do odbioru samochodu</h4>
+</div>
+
+
+
+
+<!--Table-->
+<!--<div class="row">-->
+
+<!--&lt;!&ndash;  tabela z klientami&ndash;&gt;-->
+<!--  <div class="col">-->
+<!--    <table class="table">-->
+<!--      &lt;!&ndash;Table head&ndash;&gt;-->
+<!--      <thead>-->
+<!--      <tr>-->
+<!--        <th>First Name</th>-->
+<!--        <th>Last Name</th>-->
+<!--        <th> </th>-->
+<!--      </tr>-->
+<!--      </thead>-->
+<!--      &lt;!&ndash;Table head&ndash;&gt;-->
+<!--      &lt;!&ndash;Table body&ndash;&gt;-->
+<!--      <tbody>-->
+<!--      <tr *ngFor="let klient of klienci">-->
+<!--        <td>{{klient.IMIE}}</td>-->
+<!--        <td>{{klient.NAZWISKO}}</td>-->
+<!--        <td>-->
+<!--          <button type="button" class="btn btn-outline-dark">Rezerwacje</button>-->
+<!--        </td>-->
+<!--      </tr>-->
+<!--      </tbody>-->
+<!--      &lt;!&ndash;Table body&ndash;&gt;-->
+<!--    </table>-->
+<!--    &lt;!&ndash;Table&ndash;&gt;-->
+<!--  </div>-->
+
+<!--  <div class="col">-->
+
+<!--&lt;!&ndash;    tabela z rezerwacjami &ndash;&gt;-->
+<!--    <table class="table">-->
+<!--      &lt;!&ndash;Table head&ndash;&gt;-->
+<!--      <thead>-->
+<!--      <tr>-->
+<!--        <th>ID_Samochodu</th>-->
+<!--        <th>Data Początku</th>-->
+<!--        <th>Data Końca</th>-->
+<!--        <th></th>-->
+<!--      </tr>-->
+<!--      </thead>-->
+<!--      &lt;!&ndash;Table head&ndash;&gt;-->
+<!--      &lt;!&ndash;Table body&ndash;&gt;-->
+<!--      <tbody>-->
+<!--      <tr *ngFor="let rezerwacja of rezerwacja">-->
+<!--        <td>{{rezerwacja.ID_SAMOCHODU}}</td>-->
+<!--        <td>{{rezerwacja.DATA_POCZATKU_WYPOZYCZENIA}}</td>-->
+<!--        <td>{{rezerwacja.DATA_KONCA_WYPOZYCZENIA}}</td>-->
+<!--        <td>-->
+<!--          <button type="button" class="btn btn-outline-dark">Info</button>-->
+<!--        </td>-->
+
+<!--      </tr>-->
+<!--      </tbody>-->
+<!--      &lt;!&ndash;Table body&ndash;&gt;-->
+<!--    </table>-->
+<!--    &lt;!&ndash;Table&ndash;&gt;-->
+<!--  </div>-->
+
+<!--</div>-->

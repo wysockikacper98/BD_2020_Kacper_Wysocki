@@ -15,6 +15,10 @@ export class PracownikWydanieSamochoduComponent implements OnInit {
   klient: Klienci;
   klienci: Klienci[];
 
+  //Obsługa wyświetlanej zawartosci:
+  htmlRezerwacje: boolean = false;
+  htmlOdbior: boolean =false;
+
   constructor(
     private samochodyService: SamochodyService,
     private rezerwacjeService: RezerwacjeService,
@@ -38,4 +42,12 @@ export class PracownikWydanieSamochoduComponent implements OnInit {
     this.samochodyService.getKlient(id).subscribe(klient => this.klient = klient);
   }
 
+  openHTML(number: number) {
+    this.htmlRezerwacje = this.htmlOdbior = false;
+    if (number == 1) {
+      this.htmlRezerwacje = true;
+    }else{
+      this.htmlOdbior = true;
+    }
+  }
 }

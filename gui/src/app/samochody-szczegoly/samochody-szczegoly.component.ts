@@ -82,15 +82,7 @@ export class SamochodySzczegolyComponent implements OnInit {
     }
   }
 
-  //TODO: Nie działa nawet wywołanie pliku PHP'a, ale plik PHP działa i wpisuje dane z obiektu json
   addRezerwacja(ID_SAMOCHODU: number) {
-    const rezerwacja: Rezerwacja = new class implements Rezerwacja {
-      DATA_KONCA_WYPOZYCZENIA: Date;
-      DATA_POCZATKU_WYPOZYCZENIA: Date;
-      ID_KLIENTA: number;
-      ID_REZERWACJI: number;
-      ID_SAMOCHODU: number;
-    };
     const sendRezerwacja: SendRezerwacja = new class implements SendRezerwacja {
       ID_REZERWACJI: number;
       ID_KLIENTA: number;
@@ -98,12 +90,6 @@ export class SamochodySzczegolyComponent implements OnInit {
       DATA_POCZATKU_WYPOZYCZENIA: string;
       DATA_KONCA_WYPOZYCZENIA: string;
     }
-
-    // rezerwacja.ID_REZERWACJI = 3;
-    // rezerwacja.ID_SAMOCHODU = ID_SAMOCHODU;
-    // rezerwacja.ID_KLIENTA = this.zalogowanyKlient;
-    // rezerwacja.DATA_POCZATKU_WYPOZYCZENIA = this.createDateFromMgbDate(this.fromDate);
-    // rezerwacja.DATA_KONCA_WYPOZYCZENIA = this.createDateFromMgbDate(this.toDate);
 
     sendRezerwacja.ID_REZERWACJI = this.automaticID();
     sendRezerwacja.ID_SAMOCHODU = ID_SAMOCHODU;
@@ -127,7 +113,7 @@ export class SamochodySzczegolyComponent implements OnInit {
   }
 
   automaticID(): number {
-    let i:number = 1;
+    let i: number = 1;
     let czyZaleziono: boolean;
     while (true) {
       czyZaleziono = true;

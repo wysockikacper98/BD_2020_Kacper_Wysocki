@@ -9,21 +9,19 @@
     <input #haslo type="password" class="form-control" placeholder="Hasło"/>
 
 
-    <button (click)="zaloguj(login.value, haslo.value); login.value = ''; haslo.value=''" style="margin-bottom: 30px">
+    <button class="btn btn-outline-success" (click)="zaloguj(login.value, haslo.value); login.value = ''; haslo.value=''" style="margin-bottom: 30px">
       Zaloguj
     </button>
 
 <!--    PO PODANIU ODPOWIEDNICH DANYCH LOGOWANIA  -->
     <div *ngIf="klient">
 
-      <button routerLink="/filter">Zalogowano na konto Klienta</button>
-      {{zalogowanyKlient}}
-      <!--  <app-filter></app-filter>-->
+      <button type="button" class="btn btn-outline-info" routerLink="/filter">Zalogowano na konto Klienta</button>
+
     </div>
     <div *ngIf="pracownik">
-      <button routerLink="/pracownik-wydanie-samochodu">Zalogowano na konto Pracownika</button>
-      {{zalogownayPracownik}}
-      <!--  <app-pracownik-odbior-samochodu></app-pracownik-odbior-samochodu>-->
+      <button type="button" class="btn btn-outline-info" routerLink="/pracownik-wydanie-samochodu">Zalogowano na konto Pracownika</button>
+
     </div>
 
 
