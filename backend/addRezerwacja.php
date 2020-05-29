@@ -33,8 +33,8 @@ if(isset($postData) && !empty($postData)){
     oci_bind_by_name($compiled, ':ID_REZERWACJI', $ID_REZERWACJI);
     oci_bind_by_name($compiled, ':ID_KLIENTA', $ID_KLIENTA);
     oci_bind_by_name($compiled, ':ID_SAMOCHODU', $ID_SAMOCHODU);
-    oci_bind_by_name($compiled, ':DATA_POCZATKU_WYPOZYCZENIA', $tempFromData);
-    oci_bind_by_name($compiled, ':DATA_KONCA_WYPOZYCZENIA', $tempToData);
+    oci_bind_by_name($compiled, ':DATA_POCZATKU_WYPOZYCZENIA', $DATA_POCZATKU_WYPOZYCZENIA);
+    oci_bind_by_name($compiled, ':DATA_KONCA_WYPOZYCZENIA', $DATA_KONCA_WYPOZYCZENIA);
 
     oci_execute($compiled);
 

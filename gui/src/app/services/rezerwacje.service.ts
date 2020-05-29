@@ -4,6 +4,7 @@ import {MessagesService} from "../messages/messages.service";
 import {Observable, of} from "rxjs";
 import {Rezerwacja} from "../interfaceBazyDanych/rezerwacja";
 import {catchError, map, tap} from "rxjs/operators";
+import {SendRezerwacja} from "../interfaceBazyDanych/send-rezerwacja";
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +23,7 @@ export class RezerwacjeService {
   ) {
   }
 
-  addRezerwacja(rezerwacja: Rezerwacja): Observable<Rezerwacja[]> {
+  addRezerwacja(rezerwacja: SendRezerwacja): Observable<Rezerwacja[]> {
     this.getRezerwacja();
     return this.http.post(this.addRezerwacjeURL, rezerwacja)
       .pipe(map((res)=>{
