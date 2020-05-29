@@ -1,0 +1,16 @@
+create table REZERWACJA
+(
+	ID_REZERWACJI NUMBER not null
+		constraint REZERWACJA_PK
+			primary key,
+	ID_KLIENTA NUMBER
+		constraint REZERWACJA_FK
+			references KLIENCI,
+	ID_SAMOCHODU NUMBER
+		constraint REZERWACJA_FK2
+			references SAMOCHODY,
+	DATA_POCZATKU_WYPOZYCZENIA DATE,
+	DATA_KONCA_WYPOZYCZENIA DATE
+)
+/
+
