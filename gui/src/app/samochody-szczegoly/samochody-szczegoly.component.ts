@@ -91,7 +91,7 @@ export class SamochodySzczegolyComponent implements OnInit {
       ID_REZERWACJI: number;
       ID_SAMOCHODU: number;
     };
-    const sendRezerwacja: SendRezerwacja = new class implements SendRezerwacja{
+    const sendRezerwacja: SendRezerwacja = new class implements SendRezerwacja {
       ID_REZERWACJI: number;
       ID_KLIENTA: number;
       ID_SAMOCHODU: number;
@@ -122,20 +122,28 @@ export class SamochodySzczegolyComponent implements OnInit {
 
 
   dateToString(data: Date): string {
-    const   monthNames = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
-    return data.getDay().toString() +"-"+ monthNames[data.getMonth()].toString()  +"-"+ data.getFullYear().toString().substr(-2);
+    const monthNames = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
+    return data.getDay().toString() + "-" + monthNames[data.getMonth()].toString() + "-" + data.getFullYear().toString().substr(-2);
   }
 
-  automaticID():number{
-    let i = 1;
-    while(true){
+  automaticID(): number {
+    let i:number = 1;
+    let czyZaleziono: boolean;
+    while (true) {
+      czyZaleziono = true;
       for (let rezerwacja of this.rezerwacje) {
-        if(rezerwacja.ID_REZERWACJI != this.i){
-          return this.i;
+        if (rezerwacja.ID_REZERWACJI == i) {
+          czyZaleziono = false;
         }
       }
-      this.i = this.i + 1;
+      if (czyZaleziono) {
+        return i;
+      } else {
+        i++;
+      }
+
     }
   }
+
 
 }
