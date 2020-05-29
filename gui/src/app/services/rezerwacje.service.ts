@@ -22,13 +22,16 @@ export class RezerwacjeService {
   ) {
   }
 
-  addRezerwacja(rezerwacja: Rezerwacja) {
-    this.http.post(this.addRezerwacjeURL, {data: rezerwacja})
-      .pipe(map((res) => {
-          this.rezerwacje.push(res['data']);
+  addRezerwacja(rezerwacja: Rezerwacja): Observable<Rezerwacja[]> {
+    this.getRezerwacja();
+    return this.http.post(this.addRezerwacjeURL, rezerwacja)
+      .pipe(map((res)=>{
+        this.rezerwacje.push(res['data']);
+        return this.rezerwacje;
         }),
-        tap(_ => this.log('dodanie rezerwacji')),
+        tap(_=> this.log('Dodanie rezerwacji')),
         catchError(this.handleError<Rezerwacja[]>('addRezerwacja', []))
+
       );
 
   }

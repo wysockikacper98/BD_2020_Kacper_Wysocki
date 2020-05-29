@@ -16,6 +16,7 @@ import {RezerwacjeService} from "../services/rezerwacje.service";
 export class SamochodySzczegolyComponent implements OnInit {
 
   samochody: Samochody[];
+  rezerwacje: Rezerwacja[];
 
   wybranySamochod: number;
 
@@ -39,6 +40,7 @@ export class SamochodySzczegolyComponent implements OnInit {
     this.samochodyService.currentFromData.subscribe(date => this.fromDate = date);
     this.samochodyService.currentToData.subscribe(date => this.toDate = date);
     this.loginService.currentKlient.subscribe(id => this.zalogowanyKlient = id);
+    this.rezerwacjeService.getRezerwacja().subscribe(rezerwacje => this.rezerwacje = rezerwacje);
 
   }
 
@@ -48,6 +50,7 @@ export class SamochodySzczegolyComponent implements OnInit {
 
   getID(): number {
     return this.wybranySamochod = +this.route.snapshot.paramMap.get('ID_SAMOCHODU');
+
   }
 
 
@@ -80,8 +83,8 @@ export class SamochodySzczegolyComponent implements OnInit {
   //TODO: Nie działa nawet wywołanie pliku PHP'a, ale plik PHP działa i wpisuje dane z obiektu json
   addRezerwacja(ID_SAMOCHODU: number) {
     const rezerwacja: Rezerwacja = new class implements Rezerwacja {
-      DATA_KONCA_WYPOZYCZENIA: NgbDate;
-      DATA_POCZATKU_WYPOZYCZENIA: NgbDate;
+      DATA_KONCA_WYPOZYCZENIA: Date;
+      DATA_POCZATKU_WYPOZYCZENIA: Date;
       ID_KLIENTA: number;
       ID_REZERWACJI: number;
       ID_SAMOCHODU: number;
@@ -90,11 +93,11 @@ export class SamochodySzczegolyComponent implements OnInit {
     rezerwacja.ID_REZERWACJI = 3;
     rezerwacja.ID_SAMOCHODU = ID_SAMOCHODU;
     rezerwacja.ID_KLIENTA = this.zalogowanyKlient;
-    rezerwacja.DATA_POCZATKU_WYPOZYCZENIA = this.fromDate;
-    rezerwacja.DATA_KONCA_WYPOZYCZENIA = this.toDate;
+    rezerwacja.DATA_POCZATKU_WYPOZYCZENIA = this.createDateFromMgbDate(this.fromDate);
+    rezerwacja.DATA_KONCA_WYPOZYCZENIA = this.createDateFromMgbDate(this.toDate);
     if (rezerwacja.ID_REZERWACJI != null && rezerwacja.ID_KLIENTA != null && rezerwacja.ID_SAMOCHODU != null) {
       console.log("Przed dodaniem rezerwacji");
-      this.rezerwacjeService.addRezerwacja(rezerwacja);
+      this.rezerwacjeService.addRezerwacja(rezerwacja).subscribe(rezerwacja => this.rezerwacje = rezerwacja);
     } else {
       console.log("nie podano wszystkich danych do utworzenia rezerwacji")
     }
