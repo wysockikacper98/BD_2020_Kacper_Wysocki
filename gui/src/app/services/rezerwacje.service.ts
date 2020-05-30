@@ -5,6 +5,7 @@ import {Observable, of} from "rxjs";
 import {Rezerwacja} from "../interfaceBazyDanych/rezerwacja";
 import {catchError, map, tap} from "rxjs/operators";
 import {SendRezerwacja} from "../interfaceBazyDanych/send-rezerwacja";
+import {DaneAktywnychRezerwacji} from "../interfaceBazyDanych/dane-aktywnych-rezerwacji";
 
 @Injectable({
   providedIn: 'root'
@@ -12,10 +13,12 @@ import {SendRezerwacja} from "../interfaceBazyDanych/send-rezerwacja";
 export class RezerwacjeService {
 
   private addRezerwacjeURL = 'http://localhost/BD_2020_Kacper_Wysocki/backend/addRezerwacja.php';
-  private rezerwacjaURL = 'http://localhost/BD_2020_Kacper_Wysocki/backend/rezerwacjaLista.php'
+  private rezerwacjaURL = 'http://localhost/BD_2020_Kacper_Wysocki/backend/rezerwacjaLista.php';
+  private daneRezerwajiURL ='http://localhost/BD_2020_Kacper_Wysocki/backend/daneAktywnychRezerwacji.php'
 
 
   rezerwacje: Rezerwacja[];
+  daneAktywnychrezerwacji: DaneAktywnychRezerwacji[];
 
   constructor(
     private http: HttpClient,
@@ -50,6 +53,17 @@ export class RezerwacjeService {
   }
 
 
+ getDaneAktywnychRezerwacji(): Observable<DaneAktywnychRezerwacji[]>{
+   return this.http.get(this.daneRezerwajiURL)
+     .pipe(
+       map((res) => {
+         this.daneAktywnychrezerwacji = res['data'];
+         return this.daneAktywnychrezerwacji;
+       }),
+       tap(_=> this.log('pobranie aktywnych rezerwacji')),
+       catchError(this.handleError<DaneAktywnychRezerwacji[]>('getDaneAktywnychRezerwacji', []))
+     );
+ }
 
 
 

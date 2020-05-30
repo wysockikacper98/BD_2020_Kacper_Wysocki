@@ -15,7 +15,37 @@
           -dodanie do WYDANIE_SAMOCHODU odpowiedniego rekordu-->
 <div *ngIf="htmlRezerwacje">
   <h1>Lista aktywnych rezerwacji</h1>
-  <h4>przejście do wydanie samochodu</h4>
+<!--  WYŚWIELTANIE DANYCH AKTYWNYCH REZERWACJI-->
+  <table class="table table-striped table-bordered table-hover">
+    <thead class="thead-dark">
+    <tr>
+      <th class="text-center" scope="col" colspan="2">Dane Klienta</th>
+      <th class="text-center" scope="col" colspan="3">Dane Samochodu</th>
+      <th class="text-center" scope="col" colspan="2">Czas Wypożyczenia</th>
+    </tr>
+    <tr class="thead-light">
+      <th scope="col">Imie</th>
+      <th scope="col">Nazwisko</th>
+      <th scope="col">ID</th>
+      <th scope="col">Model</th>
+      <th scope="col">Marka</th>
+      <th scope="col">Początek</th>
+      <th scope="col">Koniec</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let dane of daneAktywnychRezerwacji">
+      <td>{{dane.IMIE}}</td>
+      <td>{{dane.NAZWISKO}}</td>
+      <td>{{dane.ID_SAMOCHODU}}</td>
+      <td>{{dane.MODEL}}</td>
+      <td>{{dane.MARKA}}</td>
+      <td>{{dane.DATA_POCZATKU_WYPOZYCZENIA}}</td>
+      <td>{{dane.DATA_KONCA_WYPOZYCZENIA}}</td>
+    </tr>
+    </tbody>
+  </table>
+
 </div>
 <!--Samochody oczekujące na zakończenie wypożyczenia (klucze do odebrania)-->
 <!--TODO: po naciśnięcu przycisku przechodzimy do listy samochodów poza salonem będąchych w rękach klientów

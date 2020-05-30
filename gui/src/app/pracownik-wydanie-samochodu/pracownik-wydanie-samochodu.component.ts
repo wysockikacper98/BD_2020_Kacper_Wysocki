@@ -3,6 +3,7 @@ import {SamochodyService} from "../services/samochody.service";
 import {Rezerwacja} from "../interfaceBazyDanych/rezerwacja";
 import {Klienci} from "../interfaceBazyDanych/klienci";
 import {RezerwacjeService} from "../services/rezerwacje.service";
+import {DaneAktywnychRezerwacji} from "../interfaceBazyDanych/dane-aktywnych-rezerwacji";
 
 @Component({
   selector: 'app-pracownik-wydanie-samochodu',
@@ -14,6 +15,8 @@ export class PracownikWydanieSamochoduComponent implements OnInit {
   rezerwacja: Rezerwacja[];
   klient: Klienci;
   klienci: Klienci[];
+
+  daneAktywnychRezerwacji: DaneAktywnychRezerwacji[];
 
   //Obsługa wyświetlanej zawartosci:
   htmlRezerwacje: boolean = false;
@@ -46,6 +49,7 @@ export class PracownikWydanieSamochoduComponent implements OnInit {
     this.htmlRezerwacje = this.htmlOdbior = false;
     if (number == 1) {
       this.htmlRezerwacje = true;
+      this.rezerwacjeService.getDaneAktywnychRezerwacji().subscribe(dane => this.daneAktywnychRezerwacji = dane);
     }else{
       this.htmlOdbior = true;
     }
