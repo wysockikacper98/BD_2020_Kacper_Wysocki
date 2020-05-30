@@ -9,8 +9,7 @@
 
 </div>
 <!--Aktywne Rezerwacje (klucze do wydania )-->
-<!--TODO: po naciśnięciu klawisz wyświetla sie lista aktywnych rezerwacji,
-          -wyświetlenie listy sktywnych samochodów oczekujących na odbiór
+<!--TODO:
           -przejscie do potwierdzenia wydania kluczy,
           -dodanie do WYDANIE_SAMOCHODU odpowiedniego rekordu-->
 <div *ngIf="htmlRezerwacje">
@@ -22,6 +21,7 @@
       <th class="text-center" scope="col" colspan="2">Dane Klienta</th>
       <th class="text-center" scope="col" colspan="3">Dane Samochodu</th>
       <th class="text-center" scope="col" colspan="2">Czas Wypożyczenia</th>
+      <th class="text-center" scope="col"> </th>
     </tr>
     <tr class="thead-light">
       <th scope="col">Imie</th>
@@ -31,6 +31,7 @@
       <th scope="col">Marka</th>
       <th scope="col">Początek</th>
       <th scope="col">Koniec</th>
+      <th scope="col"> </th>
     </tr>
     </thead>
     <tbody>
@@ -42,6 +43,9 @@
       <td>{{dane.MARKA}}</td>
       <td>{{dane.DATA_POCZATKU_WYPOZYCZENIA}}</td>
       <td>{{dane.DATA_KONCA_WYPOZYCZENIA}}</td>
+      <td class="text-center" style="width: 5%">
+        <button type="button" class="btn btn-outline-success" (click)="wydanieKluczy(dane.ID_REZERWACJI)"><img src="assets/icons/wydanieKluczy.png"></button>
+      </td>
     </tr>
     </tbody>
   </table>
@@ -55,7 +59,30 @@
           - dodawnie odpowiedniego wpisu do tabeli WYPOZYCZENIE-->
 <div *ngIf="htmlOdbior">
   <h1>Lista wydanych samochodów</h1>
-  <h4>przejscie do odbioru samochodu</h4>
+  //Wyświetlanie samochodów oczekujących na odbiór
+  <table class="table table-striped table-bordered table-hover">
+    <thead class="thead-dark">
+    <tr>
+      <th class="text-center" scope="col" colspan="2">Dane Klienta</th>
+      <th class="text-center" scope="col" colspan="3">Dane Samochodu</th>
+      <th class="text-center" scope="col" colspan="2">Czas Wypożyczenia</th>
+      <th class="text-center" scope="col"> </th>
+    </tr>
+    <tr class="thead-light">
+      <th scope="col">Imie</th>
+      <th scope="col">Nazwisko</th>
+      <th scope="col">ID</th>
+      <th scope="col">Model</th>
+      <th scope="col">Marka</th>
+      <th scope="col">Początek</th>
+      <th scope="col">Koniec</th>
+      <th scope="col"> </th>
+    </tr>
+    </thead>
+    <tbody>
+
+    </tbody>
+  </table>
 </div>
 
 

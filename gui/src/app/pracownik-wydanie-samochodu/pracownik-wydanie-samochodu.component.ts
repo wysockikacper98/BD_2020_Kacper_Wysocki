@@ -4,6 +4,10 @@ import {Rezerwacja} from "../interfaceBazyDanych/rezerwacja";
 import {Klienci} from "../interfaceBazyDanych/klienci";
 import {RezerwacjeService} from "../services/rezerwacje.service";
 import {DaneAktywnychRezerwacji} from "../interfaceBazyDanych/dane-aktywnych-rezerwacji";
+import {WydanieSamochodu} from "../interfaceBazyDanych/wydanie-samochodu";
+import {LoginService} from "../services/login.service";
+import {SendWydanieSamochodu} from "../interfaceBazyDanych/send-wydanie-samochodu";
+import {Data} from "@angular/router";
 
 @Component({
   selector: 'app-pracownik-wydanie-samochodu',
@@ -16,7 +20,10 @@ export class PracownikWydanieSamochoduComponent implements OnInit {
   klient: Klienci;
   klienci: Klienci[];
 
+  zalogowanyPracownik: number;
+
   daneAktywnychRezerwacji: DaneAktywnychRezerwacji[];
+  samochodyDoOdbioru: WydanieSamochodu[];
 
   //Obsługa wyświetlanej zawartosci:
   htmlRezerwacje: boolean = false;
@@ -25,9 +32,12 @@ export class PracownikWydanieSamochoduComponent implements OnInit {
   constructor(
     private samochodyService: SamochodyService,
     private rezerwacjeService: RezerwacjeService,
+    private loginService: LoginService,
   ) { }
 
   ngOnInit(): void {
+    this.loginService.currnetPracownick.subscribe(pracownik => this.zalogowanyPracownik = pracownik);
+    this.rezerwacjeService.getSamochodyDoOdbioru().subscribe(dane => this.samochodyDoOdbioru = dane);
     this.getRezerwacja();
     // this.getKlient(6);
     this.getKlienci();
@@ -41,17 +51,63 @@ export class PracownikWydanieSamochoduComponent implements OnInit {
     this.samochodyService.getKlienci().subscribe(klienci => this.klienci = klienci);
   }
 
-  getKlient(id: number): void {
-    this.samochodyService.getKlient(id).subscribe(klient => this.klient = klient);
-  }
 
   openHTML(number: number) {
     this.htmlRezerwacje = this.htmlOdbior = false;
     if (number == 1) {
       this.htmlRezerwacje = true;
       this.rezerwacjeService.getDaneAktywnychRezerwacji().subscribe(dane => this.daneAktywnychRezerwacji = dane);
-    }else{
+    }else if(number == 2){
       this.htmlOdbior = true;
+      this.rezerwacjeService.getSamochodyDoOdbioru().subscribe(dane => this.samochodyDoOdbioru = dane);
+    }
+  }
+
+  wydanieKluczy(ID_REZERWACJI: number) {
+    //TODO: dodanie rekordu wydania samochodu
+    const sendWydanieSamochodu: SendWydanieSamochodu = new class implements SendWydanieSamochodu{
+      ID_WYDANIA: number;
+      ID_REZERWACJI: number;
+      ID_PRACOWNIKA: number;
+      DATA_WYDANIA_SAMOCHODU: string;
+    }
+
+
+    sendWydanieSamochodu.ID_WYDANIA = this.automaticID();
+    sendWydanieSamochodu.ID_REZERWACJI = ID_REZERWACJI;
+    sendWydanieSamochodu.ID_PRACOWNIKA = this.zalogowanyPracownik;
+    sendWydanieSamochodu.DATA_WYDANIA_SAMOCHODU = this.getToDayString();
+
+    if(sendWydanieSamochodu.ID_WYDANIA != null && sendWydanieSamochodu.ID_REZERWACJI != null && sendWydanieSamochodu.ID_PRACOWNIKA != null){
+      this.rezerwacjeService.addWydaneSamochody(sendWydanieSamochodu).subscribe(data => this.samochodyDoOdbioru = data);
+    }else{
+      console.log("Nie podano wszysktich potrzebnych informancji");
+    }
+
+    //odświerzenie listy (jeśli nie jest odświerzona automatyczne)
+  }
+
+  getToDayString(): string {
+    const monthNames = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
+    let data = new Date();
+    return data.getDate().toString() + "-" + monthNames[data.getMonth()].toString() + "-" + data.getFullYear().toString().substr(-2);
+  }
+  automaticID(): number {
+    let i: number = 1;
+    let czyZaleziono: boolean;
+    while (true) {
+      czyZaleziono = true;
+      for (let samochod of this.samochodyDoOdbioru) {
+        if (samochod.ID_WYDANIA == i) {
+          czyZaleziono = false;
+        }
+      }
+      if (czyZaleziono) {
+        return i;
+      } else {
+        i++;
+      }
+
     }
   }
 }

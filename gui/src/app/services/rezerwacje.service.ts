@@ -6,6 +6,8 @@ import {Rezerwacja} from "../interfaceBazyDanych/rezerwacja";
 import {catchError, map, tap} from "rxjs/operators";
 import {SendRezerwacja} from "../interfaceBazyDanych/send-rezerwacja";
 import {DaneAktywnychRezerwacji} from "../interfaceBazyDanych/dane-aktywnych-rezerwacji";
+import {WydanieSamochodu} from "../interfaceBazyDanych/wydanie-samochodu";
+import {SendWydanieSamochodu} from "../interfaceBazyDanych/send-wydanie-samochodu";
 
 @Injectable({
   providedIn: 'root'
@@ -15,10 +17,13 @@ export class RezerwacjeService {
   private addRezerwacjeURL = 'http://localhost/BD_2020_Kacper_Wysocki/backend/addRezerwacja.php';
   private rezerwacjaURL = 'http://localhost/BD_2020_Kacper_Wysocki/backend/rezerwacjaLista.php';
   private daneRezerwajiURL ='http://localhost/BD_2020_Kacper_Wysocki/backend/daneAktywnychRezerwacji.php'
+  private wydanieSamochduURL = 'http://localhost/BD_2020_Kacper_Wysocki/backend/addWydanieSamochodu.php';
+  private samochodyDoOdbioruURL = 'http://localhost/BD_2020_Kacper_Wysocki/backend/getWydaneSamochody.php';
 
 
   rezerwacje: Rezerwacja[];
   daneAktywnychrezerwacji: DaneAktywnychRezerwacji[];
+  samochodyDoOdbioru: WydanieSamochodu[];
 
   constructor(
     private http: HttpClient,
@@ -26,8 +31,22 @@ export class RezerwacjeService {
   ) {
   }
 
+  addWydaneSamochody(dane: SendWydanieSamochodu): Observable<WydanieSamochodu[]>{
+    return this.http.post(this.wydanieSamochduURL, dane)
+      .pipe(
+        map((res) =>{
+          this.samochodyDoOdbioru.push(res['data']);
+          return this.samochodyDoOdbioru;
+        }),
+        tap(_=> this.log('wydano samochód')),
+        catchError(this.handleError<WydanieSamochodu[]>('addWydanieSamochodu', []))
+      );
+  }
+
+
+
   addRezerwacja(rezerwacja: SendRezerwacja): Observable<Rezerwacja[]> {
-    this.getRezerwacja();
+    this.getRezerwacja();//TODO: sprawdzić czy ten wiersz jest potrzebny do poprawnego działania kodu(raczej nie)
     return this.http.post(this.addRezerwacjeURL, rezerwacja)
       .pipe(map((res)=>{
         this.rezerwacje.push(res['data']);
@@ -65,6 +84,17 @@ export class RezerwacjeService {
      );
  }
 
+ getSamochodyDoOdbioru(): Observable<WydanieSamochodu[]>{
+    return this.http.get(this.samochodyDoOdbioruURL)
+      .pipe(
+        map((res)=>{
+          this.samochodyDoOdbioru = res['data'];
+          return this.samochodyDoOdbioru;
+        }),
+        tap(_=> this.log('pobieranie samochodów do odbioru')),
+        catchError(this.handleError<WydanieSamochodu[]>('getSamochodyDoOdbioru', []))
+      );
+ }
 
 
 
