@@ -15,6 +15,8 @@ import {SendRezerwacja} from "../interfaceBazyDanych/send-rezerwacja";
 })
 export class SamochodySzczegolyComponent implements OnInit {
 
+  dokonanoRezerwacji: boolean = false;
+
   i: number;
   samochody: Samochody[];
   rezerwacje: Rezerwacja[];
@@ -96,9 +98,8 @@ export class SamochodySzczegolyComponent implements OnInit {
     sendRezerwacja.DATA_KONCA_WYPOZYCZENIA = this.dateToString(this.createDateFromMgbDate(this.toDate));
 
     if (sendRezerwacja.ID_REZERWACJI != null && sendRezerwacja.ID_KLIENTA != null && sendRezerwacja.ID_SAMOCHODU != null) {
-      // this.rezerwacjeService.addRezerwacja(rezerwacja).subscribe(rezerwacja => this.rezerwacje = rezerwacja);
       this.rezerwacjeService.addRezerwacja(sendRezerwacja).subscribe(rezerwacja => this.rezerwacje = rezerwacja);
-
+      this.dokonanoRezerwacji = true;
     } else {
       console.log("nie podano wszystkich danych do utworzenia rezerwacji")
     }

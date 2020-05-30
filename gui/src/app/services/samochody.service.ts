@@ -4,12 +4,8 @@ import {catchError, filter, map, tap} from "rxjs/operators";
 import {Observable, of} from "rxjs";
 import {MessagesService} from "../messages/messages.service";
 import {Samochody} from "../interfaceBazyDanych/samochody";
-import {ObjectAssignBuiltinFn} from "@angular/compiler-cli/src/ngtsc/partial_evaluator/src/builtin";
-import {forEachComment} from "tslint";
-import {SamochodyComponent} from "../samochody/samochody.component";
 import {NgbCalendar, NgbDate} from "@ng-bootstrap/ng-bootstrap";
 import{BehaviorSubject} from "rxjs";
-import {Rezerwacja} from "../interfaceBazyDanych/rezerwacja";
 import {Klienci} from "../interfaceBazyDanych/klienci";
 
 @Injectable({

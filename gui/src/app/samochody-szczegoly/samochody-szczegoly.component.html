@@ -91,12 +91,16 @@
           <button routerLink="/samochody" class="btn-lg btn-danger">Cofnij</button>
         </div>
 
-        <div class="col text-right"><!-- Button -->
-          <button routerLink="/samochody" class="btn-lg btn-danger" (click)="addRezerwacja(samochod.ID_SAMOCHODU);">
+        <div *ngIf="!dokonanoRezerwacji" class="col text-right"><!-- Button -->
+          <button class="btn-lg btn-danger" (click)="addRezerwacja(samochod.ID_SAMOCHODU);">
             Zarezerwuj
           </button>
         </div>
-
+        <div *ngIf="dokonanoRezerwacji" class="col text-right">
+         <button type="button" class="btn-lg btn-outline-success" disabled>
+           Dokonano Rezerwacji
+         </button>
+        </div>
 
       </div>
 
