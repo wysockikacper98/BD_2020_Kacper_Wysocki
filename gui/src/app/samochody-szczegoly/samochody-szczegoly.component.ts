@@ -1,8 +1,7 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Samochody} from "../interfaceBazyDanych/samochody";
 import {SamochodyService} from "../services/samochody.service";
 import {ActivatedRoute} from "@angular/router";
-import {Location} from "@angular/common";
 import {NgbDate} from "@ng-bootstrap/ng-bootstrap";
 import {LoginService} from "../services/login.service";
 import {Rezerwacja} from "../interfaceBazyDanych/rezerwacja";
@@ -64,8 +63,7 @@ export class SamochodySzczegolyComponent implements OnInit {
   }
 
   createDateFromMgbDate(ngbDate: NgbDate): Date {
-    const date: Date = new Date(Date.UTC(ngbDate.year, ngbDate.month - 1, ngbDate.day));
-    return date;
+    return new Date(ngbDate.year, ngbDate.month - 1, ngbDate.day);
   }
 
 
@@ -109,7 +107,7 @@ export class SamochodySzczegolyComponent implements OnInit {
 
   dateToString(data: Date): string {
     const monthNames = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
-    return data.getDay().toString() + "-" + monthNames[data.getMonth()].toString() + "-" + data.getFullYear().toString().substr(-2);
+    return data.getDate().toString() + "-" + monthNames[data.getMonth()].toString() + "-" + data.getFullYear().toString().substr(-2);
   }
 
   automaticID(): number {
