@@ -8,6 +8,8 @@ import {SendRezerwacja} from "../interfaceBazyDanych/send-rezerwacja";
 import {DaneAktywnychRezerwacji} from "../interfaceBazyDanych/dane-aktywnych-rezerwacji";
 import {WydanieSamochodu} from "../interfaceBazyDanych/wydanie-samochodu";
 import {SendWydanieSamochodu} from "../interfaceBazyDanych/send-wydanie-samochodu";
+import {OutOfBandDiagnosticRecorder} from "@angular/compiler-cli/src/ngtsc/typecheck/src/oob";
+import {DaneAktywnychWYpozyczen} from "../interfaceBazyDanych/dane-aktywnych-wypozyczen";
 
 @Injectable({
   providedIn: 'root'
@@ -18,11 +20,12 @@ export class RezerwacjeService {
   private rezerwacjaURL = 'http://localhost/BD_2020_Kacper_Wysocki/backend/rezerwacjaLista.php';
   private daneRezerwajiURL ='http://localhost/BD_2020_Kacper_Wysocki/backend/daneAktywnychRezerwacji.php'
   private wydanieSamochduURL = 'http://localhost/BD_2020_Kacper_Wysocki/backend/addWydanieSamochodu.php';
-  private samochodyDoOdbioruURL = 'http://localhost/BD_2020_Kacper_Wysocki/backend/getWydaneSamochody.php';
+  private daneWypozyczeniaURL = 'http://localhost/BD_2020_Kacper_Wysocki/backend/daneAktywnychWypozyczen.php';
 
 
   rezerwacje: Rezerwacja[];
   daneAktywnychrezerwacji: DaneAktywnychRezerwacji[];
+  daneAktywnychWypozyczen: DaneAktywnychWYpozyczen[];
   samochodyDoOdbioru: WydanieSamochodu[];
 
   constructor(
@@ -84,18 +87,17 @@ export class RezerwacjeService {
      );
  }
 
- getSamochodyDoOdbioru(): Observable<WydanieSamochodu[]>{
-    return this.http.get(this.samochodyDoOdbioruURL)
+getDaneAktywnychWypozyczen(): Observable<DaneAktywnychWYpozyczen[]>{
+    return this.http.get(this.daneWypozyczeniaURL)
       .pipe(
         map((res)=>{
-          this.samochodyDoOdbioru = res['data'];
-          return this.samochodyDoOdbioru;
+          this.daneAktywnychWypozyczen = res['data'];
+          return this.daneAktywnychWypozyczen;
         }),
-        tap(_=> this.log('pobieranie samochodów do odbioru')),
-        catchError(this.handleError<WydanieSamochodu[]>('getSamochodyDoOdbioru', []))
+        tap(_=> this.log('pobranie akeywnych wypozyczen')),
+        catchError(this.handleError<DaneAktywnychWYpozyczen[]>('getDaneAktywnychWypozczyen', []))
       );
- }
-
+}
 
 
   private log(message: string) {

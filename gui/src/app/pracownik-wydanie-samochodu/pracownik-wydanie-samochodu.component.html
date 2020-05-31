@@ -1,5 +1,4 @@
-
-<div class = "row" style="margin-bottom: 30px">
+<div class="row" style="margin-bottom: 30px">
   <div class="col-6 text-center">
     <button type="button" class="btn btn-outline-dark" (click)="openHTML(1)">Rezerwacje</button>
   </div>
@@ -9,29 +8,28 @@
 
 </div>
 <!--Aktywne Rezerwacje (klucze do wydania )-->
-<!--TODO:
-          -przejscie do potwierdzenia wydania kluczy,
-          -dodanie do WYDANIE_SAMOCHODU odpowiedniego rekordu-->
 <div *ngIf="htmlRezerwacje">
-  <h1>Lista aktywnych rezerwacji</h1>
-<!--  WYŚWIELTANIE DANYCH AKTYWNYCH REZERWACJI-->
+  <!--  WYŚWIELTANIE DANYCH AKTYWNYCH REZERWACJI-->
   <table class="table table-striped table-bordered table-hover">
     <thead class="thead-dark">
+    <tr>
+      <th class="text-center" colspan="8"><h3>Lista aktywnych rezerwacji</h3></th>
+    </tr>
     <tr>
       <th class="text-center" scope="col" colspan="2">Dane Klienta</th>
       <th class="text-center" scope="col" colspan="3">Dane Samochodu</th>
       <th class="text-center" scope="col" colspan="2">Czas Wypożyczenia</th>
-      <th class="text-center" scope="col"> </th>
+      <th class="text-center" scope="col"></th>
     </tr>
     <tr class="thead-light">
       <th scope="col">Imie</th>
       <th scope="col">Nazwisko</th>
       <th scope="col">ID</th>
-      <th scope="col">Model</th>
       <th scope="col">Marka</th>
+      <th scope="col">Model</th>
       <th scope="col">Początek</th>
       <th scope="col">Koniec</th>
-      <th scope="col"> </th>
+      <th scope="col"></th>
     </tr>
     </thead>
     <tbody>
@@ -39,12 +37,14 @@
       <td>{{dane.IMIE}}</td>
       <td>{{dane.NAZWISKO}}</td>
       <td>{{dane.ID_SAMOCHODU}}</td>
-      <td>{{dane.MODEL}}</td>
       <td>{{dane.MARKA}}</td>
+      <td>{{dane.MODEL}}</td>
       <td>{{dane.DATA_POCZATKU_WYPOZYCZENIA}}</td>
       <td>{{dane.DATA_KONCA_WYPOZYCZENIA}}</td>
       <td class="text-center" style="width: 5%">
-        <button type="button" class="btn btn-outline-success" (click)="wydanieKluczy(dane.ID_REZERWACJI)"><img src="assets/icons/wydanieKluczy.png"></button>
+        <button type="button" class="btn btn-outline-success" (click)="wydanieKluczy(dane.ID_REZERWACJI)">
+          <img src="assets/icons/wydanieKluczy.png" alt="Wydanie Kluczy">
+        </button>
       </td>
     </tr>
     </tbody>
@@ -58,34 +58,47 @@
           - dodanie wpisu dotyczącego rezerwacji
           - dodawnie odpowiedniego wpisu do tabeli WYPOZYCZENIE-->
 <div *ngIf="htmlOdbior">
-  <h1>Lista wydanych samochodów</h1>
-  //Wyświetlanie samochodów oczekujących na odbiór
+  <!--  Wyświetlanie samochodów oczekujących na odbiór-->
   <table class="table table-striped table-bordered table-hover">
     <thead class="thead-dark">
+    <tr>
+      <th class="text-center" colspan="8"><h3>Lista wydanych samochodów</h3></th>
+    </tr>
     <tr>
       <th class="text-center" scope="col" colspan="2">Dane Klienta</th>
       <th class="text-center" scope="col" colspan="3">Dane Samochodu</th>
       <th class="text-center" scope="col" colspan="2">Czas Wypożyczenia</th>
-      <th class="text-center" scope="col"> </th>
+      <th class="text-center" scope="col"></th>
     </tr>
     <tr class="thead-light">
       <th scope="col">Imie</th>
       <th scope="col">Nazwisko</th>
       <th scope="col">ID</th>
-      <th scope="col">Model</th>
       <th scope="col">Marka</th>
+      <th scope="col">Model</th>
       <th scope="col">Początek</th>
       <th scope="col">Koniec</th>
-      <th scope="col"> </th>
+      <th scope="col"></th>
     </tr>
     </thead>
     <tbody>
-
+    <tr *ngFor="let wypozyczenie of daneAktywnychWypozyczen">
+      <td>{{wypozyczenie.IMIE}}</td>
+      <td>{{wypozyczenie.NAZWISKO}}</td>
+      <td>{{wypozyczenie.ID_SAMOCHODU}}</td>
+      <td>{{wypozyczenie.MARKA}}</td>
+      <td>{{wypozyczenie.MODEL}}</td>
+      <td>{{wypozyczenie.DATA_POCZATKU_WYPOZYCZENIA}}</td>
+      <td>{{wypozyczenie.DATA_KONCA_WYPOZYCZENIA}}</td>
+      <td class="text-center" style="width: 5%">
+        <button type="button" class="btn btn-outline-success">
+          <img src="assets/icons/odbriorSamochodu.png" alt="Odbiór Samochodu">
+        </button>
+      </td>
+    </tr>
     </tbody>
   </table>
 </div>
-
-
 
 
 <!--Table-->

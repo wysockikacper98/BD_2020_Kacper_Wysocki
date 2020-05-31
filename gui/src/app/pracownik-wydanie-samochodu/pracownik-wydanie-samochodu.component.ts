@@ -8,6 +8,7 @@ import {WydanieSamochodu} from "../interfaceBazyDanych/wydanie-samochodu";
 import {LoginService} from "../services/login.service";
 import {SendWydanieSamochodu} from "../interfaceBazyDanych/send-wydanie-samochodu";
 import {Data} from "@angular/router";
+import {DaneAktywnychWYpozyczen} from "../interfaceBazyDanych/dane-aktywnych-wypozyczen";
 
 @Component({
   selector: 'app-pracownik-wydanie-samochodu',
@@ -23,7 +24,9 @@ export class PracownikWydanieSamochoduComponent implements OnInit {
   zalogowanyPracownik: number;
 
   daneAktywnychRezerwacji: DaneAktywnychRezerwacji[];
+  daneAktywnychWypozyczen: DaneAktywnychWYpozyczen[];
   samochodyDoOdbioru: WydanieSamochodu[];
+
 
   //Obsługa wyświetlanej zawartosci:
   htmlRezerwacje: boolean = false;
@@ -37,7 +40,6 @@ export class PracownikWydanieSamochoduComponent implements OnInit {
 
   ngOnInit(): void {
     this.loginService.currnetPracownick.subscribe(pracownik => this.zalogowanyPracownik = pracownik);
-    this.rezerwacjeService.getSamochodyDoOdbioru().subscribe(dane => this.samochodyDoOdbioru = dane);
     this.getRezerwacja();
     // this.getKlient(6);
     this.getKlienci();
@@ -59,7 +61,7 @@ export class PracownikWydanieSamochoduComponent implements OnInit {
       this.rezerwacjeService.getDaneAktywnychRezerwacji().subscribe(dane => this.daneAktywnychRezerwacji = dane);
     }else if(number == 2){
       this.htmlOdbior = true;
-      this.rezerwacjeService.getSamochodyDoOdbioru().subscribe(dane => this.samochodyDoOdbioru = dane);
+      this.rezerwacjeService.getDaneAktywnychWypozyczen().subscribe(dane => this.daneAktywnychWypozyczen = dane);
     }
   }
 
@@ -80,6 +82,7 @@ export class PracownikWydanieSamochoduComponent implements OnInit {
 
     if(sendWydanieSamochodu.ID_WYDANIA != null && sendWydanieSamochodu.ID_REZERWACJI != null && sendWydanieSamochodu.ID_PRACOWNIKA != null){
       this.rezerwacjeService.addWydaneSamochody(sendWydanieSamochodu).subscribe(data => this.samochodyDoOdbioru = data);
+      this.rezerwacjeService.getDaneAktywnychRezerwacji().subscribe(dane => this.daneAktywnychRezerwacji = dane);
     }else{
       console.log("Nie podano wszysktich potrzebnych informancji");
     }
