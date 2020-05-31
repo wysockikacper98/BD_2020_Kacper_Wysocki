@@ -75,13 +75,11 @@ export class PracownikWydanieSamochoduComponent implements OnInit {
       DATA_WYDANIA_SAMOCHODU: string;
     }
 
-
-    sendWydanieSamochodu.ID_WYDANIA = this.automaticID();
     sendWydanieSamochodu.ID_REZERWACJI = ID_REZERWACJI;
     sendWydanieSamochodu.ID_PRACOWNIKA = this.zalogowanyPracownik;
     sendWydanieSamochodu.DATA_WYDANIA_SAMOCHODU = this.getToDayString();
 
-    if(sendWydanieSamochodu.ID_WYDANIA != null && sendWydanieSamochodu.ID_REZERWACJI != null && sendWydanieSamochodu.ID_PRACOWNIKA != null){
+    if(sendWydanieSamochodu.ID_REZERWACJI != null && sendWydanieSamochodu.ID_PRACOWNIKA != null){
       this.rezerwacjeService.addWydaneSamochody(sendWydanieSamochodu).subscribe(data => this.samochodyDoOdbioru = data);
       this.rezerwacjeService.getDaneAktywnychRezerwacji().subscribe(dane => this.daneAktywnychRezerwacji = dane);
     }else{

@@ -8,18 +8,18 @@ $postData = file_get_contents("php://input");
 if(isset($postData) && !empty($postData)) {
     //extract data
     $request = json_decode($postData);
-//test
-    $ID_WYDANIA = $request->ID_WYDANIA;
+
+//    $ID_WYDANIA = $request->ID_WYDANIA;
     $ID_REZERWACJI = $request->ID_REZERWACJI;
     $ID_PRACOWNIKA = $request->ID_PRACOWNIKA;
     $DATA_WYDANIA_SAMOCHODU = $request->DATA_WYDANIA_SAMOCHODU;
 
-    $sql = 'insert into WYDANIE_SAMOCHODU(ID_WYDANIA, ID_REZERWACJI, ID_PRACOWNIKA, DATA_WYDANIA_SAMOCHODU)
-            values ( :ID_WYDANIA, :ID_REZERWACJI, :ID_PRACOWNIKA, :DATA_WYDANIA_SAMOCHODU)';
+    $sql = 'insert into WYDANIE_SAMOCHODU(ID_REZERWACJI, ID_PRACOWNIKA, DATA_WYDANIA_SAMOCHODU)
+            values (:ID_REZERWACJI, :ID_PRACOWNIKA, :DATA_WYDANIA_SAMOCHODU)';
 
     $compiled = oci_parse($con, $sql);
 
-    oci_bind_by_name($compiled, ':ID_WYDANIA', $ID_WYDANIA);
+//    oci_bind_by_name($compiled, ':ID_WYDANIA', $ID_WYDANIA);
     oci_bind_by_name($compiled, ':ID_REZERWACJI', $ID_REZERWACJI);
     oci_bind_by_name($compiled, ':ID_PRACOWNIKA', $ID_PRACOWNIKA);
     oci_bind_by_name($compiled, ':DATA_WYDANIA_SAMOCHODU', $DATA_WYDANIA_SAMOCHODU);
