@@ -10,6 +10,8 @@ import {WydanieSamochodu} from "../interfaceBazyDanych/wydanie-samochodu";
 import {SendWydanieSamochodu} from "../interfaceBazyDanych/send-wydanie-samochodu";
 import {OutOfBandDiagnosticRecorder} from "@angular/compiler-cli/src/ngtsc/typecheck/src/oob";
 import {DaneAktywnychWYpozyczen} from "../interfaceBazyDanych/dane-aktywnych-wypozyczen";
+import {OdbiorSamochodu} from "../interfaceBazyDanych/odbior-samochodu";
+import {SendOdbiorSamochodu} from "../interfaceBazyDanych/send-odbior-samochodu";
 
 @Injectable({
   providedIn: 'root'
@@ -22,17 +24,32 @@ export class RezerwacjeService {
   private wydanieSamochduURL = 'http://localhost/BD_2020_Kacper_Wysocki/backend/addWydanieSamochodu.php';
   private daneWypozyczeniaURL = 'http://localhost/BD_2020_Kacper_Wysocki/backend/daneAktywnychWypozyczen.php';
   private getWydaneSamochodyURL = 'http://localhost/BD_2020_Kacper_Wysocki/backend/getWydaneSamochody.php';
+  private odbiorSamochoduURL = 'http://localhost/BD_2020_Kacper_Wysocki/backend/addOdbiorSamochodu.php';
 
 
   rezerwacje: Rezerwacja[];
   daneAktywnychrezerwacji: DaneAktywnychRezerwacji[];
   daneAktywnychWypozyczen: DaneAktywnychWYpozyczen[];
   samochodyDoOdbioru: WydanieSamochodu[];
+  samochodyOdbiorLista: OdbiorSamochodu[];
 
   constructor(
     private http: HttpClient,
     private messageService: MessagesService,
   ) {
+  }
+
+
+  addOdbiorSamochodu(dane: SendOdbiorSamochodu): Observable<OdbiorSamochodu[]>{
+    return this.http.post(this.odbiorSamochoduURL, dane)
+      .pipe(
+        map((res)=>{
+          this.samochodyOdbiorLista.push(res['data']);
+          return this.samochodyOdbiorLista;
+        }),
+        tap(_=> this.log('odebrano samochod')),
+        catchError(this.handleError<OdbiorSamochodu[]>('addOdbiorSamochodu', []))
+      );
   }
 
   addWydaneSamochody(dane: SendWydanieSamochodu): Observable<WydanieSamochodu[]>{

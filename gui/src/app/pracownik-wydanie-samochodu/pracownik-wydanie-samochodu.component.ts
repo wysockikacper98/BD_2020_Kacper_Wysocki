@@ -9,6 +9,8 @@ import {LoginService} from "../services/login.service";
 import {SendWydanieSamochodu} from "../interfaceBazyDanych/send-wydanie-samochodu";
 import {Data} from "@angular/router";
 import {DaneAktywnychWYpozyczen} from "../interfaceBazyDanych/dane-aktywnych-wypozyczen";
+import {SendOdbiorSamochodu} from "../interfaceBazyDanych/send-odbior-samochodu";
+import {OdbiorSamochodu} from "../interfaceBazyDanych/odbior-samochodu";
 
 @Component({
   selector: 'app-pracownik-wydanie-samochodu',
@@ -26,6 +28,7 @@ export class PracownikWydanieSamochoduComponent implements OnInit {
   daneAktywnychRezerwacji: DaneAktywnychRezerwacji[];
   daneAktywnychWypozyczen: DaneAktywnychWYpozyczen[];
   samochodyDoOdbioru: WydanieSamochodu[];
+  odbiorSamochoduList: OdbiorSamochodu[];
 
 
   //Obsługa wyświetlanej zawartosci:
@@ -67,7 +70,6 @@ export class PracownikWydanieSamochoduComponent implements OnInit {
   }
 
   wydanieKluczy(ID_REZERWACJI: number) {
-    //TODO: dodanie rekordu wydania samochodu
     let sendWydanieSamochodu: SendWydanieSamochodu = new class implements SendWydanieSamochodu{
       ID_WYDANIA: number;
       ID_REZERWACJI: number;
@@ -81,13 +83,40 @@ export class PracownikWydanieSamochoduComponent implements OnInit {
 
     if(sendWydanieSamochodu.ID_REZERWACJI != null && sendWydanieSamochodu.ID_PRACOWNIKA != null){
       this.rezerwacjeService.addWydaneSamochody(sendWydanieSamochodu).subscribe(data => this.samochodyDoOdbioru = data);
-      this.rezerwacjeService.getDaneAktywnychRezerwacji().subscribe(dane => this.daneAktywnychRezerwacji = dane);
     }else{
       console.log("Nie podano wszysktich potrzebnych informancji");
     }
 
-    //odświerzenie listy (jeśli nie jest odświerzona automatyczne)
+    this.rezerwacjeService.getDaneAktywnychRezerwacji().subscribe(dane => this.daneAktywnychRezerwacji = dane);
   }
+
+
+
+  addOdbiorSamochodu(ID_WYDANIA: number) {
+    let sendOdbiorSamochodu: SendOdbiorSamochodu  = new class implements SendOdbiorSamochodu{
+      ID_ODBIORU: number;
+      ID_WYDANIA: number;
+      ID_PRACOWNIKA: number;
+      DATA_ODBIORU_SAMOCHODU: string;
+    }
+
+    sendOdbiorSamochodu.ID_WYDANIA = ID_WYDANIA;
+    sendOdbiorSamochodu.ID_PRACOWNIKA = this.zalogowanyPracownik;
+    sendOdbiorSamochodu.DATA_ODBIORU_SAMOCHODU = this.getToDayString();
+
+    if(sendOdbiorSamochodu.ID_WYDANIA != null && sendOdbiorSamochodu.ID_PRACOWNIKA != null){
+      this.rezerwacjeService.addOdbiorSamochodu(sendOdbiorSamochodu).subscribe(data => this.odbiorSamochoduList = data);
+    }else {
+      console.log("Nie podano wszystkich informacji do odbioru samochdou")
+    }
+    this.rezerwacjeService.getDaneAktywnychWypozyczen().subscribe(dane => this.daneAktywnychWypozyczen = dane);
+  }
+
+
+
+
+
+
 
   getToDayString(): string {
     const monthNames = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
