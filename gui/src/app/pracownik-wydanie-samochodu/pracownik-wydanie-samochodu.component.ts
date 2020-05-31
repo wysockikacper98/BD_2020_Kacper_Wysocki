@@ -40,6 +40,7 @@ export class PracownikWydanieSamochoduComponent implements OnInit {
 
   ngOnInit(): void {
     this.loginService.currnetPracownick.subscribe(pracownik => this.zalogowanyPracownik = pracownik);
+    this.rezerwacjeService.getWydaneSamochdy().subscribe(dane => this.samochodyDoOdbioru = dane);
     this.getRezerwacja();
     // this.getKlient(6);
     this.getKlienci();
@@ -67,7 +68,7 @@ export class PracownikWydanieSamochoduComponent implements OnInit {
 
   wydanieKluczy(ID_REZERWACJI: number) {
     //TODO: dodanie rekordu wydania samochodu
-    const sendWydanieSamochodu: SendWydanieSamochodu = new class implements SendWydanieSamochodu{
+    let sendWydanieSamochodu: SendWydanieSamochodu = new class implements SendWydanieSamochodu{
       ID_WYDANIA: number;
       ID_REZERWACJI: number;
       ID_PRACOWNIKA: number;
@@ -95,17 +96,20 @@ export class PracownikWydanieSamochoduComponent implements OnInit {
     let data = new Date();
     return data.getDate().toString() + "-" + monthNames[data.getMonth()].toString() + "-" + data.getFullYear().toString().substr(-2);
   }
+
   automaticID(): number {
     let i: number = 1;
     let czyZaleziono: boolean;
     while (true) {
       czyZaleziono = true;
       for (let samochod of this.samochodyDoOdbioru) {
+        console.log("I: " + i + " ID_WYDANIA: " + samochod.ID_WYDANIA + " ID_Rezerwacji:" + samochod.ID_REZERWACJI)
         if (samochod.ID_WYDANIA == i) {
           czyZaleziono = false;
         }
       }
       if (czyZaleziono) {
+        console.log("zanleziony ID_Wydania = " + i);
         return i;
       } else {
         i++;

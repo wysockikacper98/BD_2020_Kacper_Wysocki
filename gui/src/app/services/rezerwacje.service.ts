@@ -21,6 +21,7 @@ export class RezerwacjeService {
   private daneRezerwajiURL ='http://localhost/BD_2020_Kacper_Wysocki/backend/daneAktywnychRezerwacji.php'
   private wydanieSamochduURL = 'http://localhost/BD_2020_Kacper_Wysocki/backend/addWydanieSamochodu.php';
   private daneWypozyczeniaURL = 'http://localhost/BD_2020_Kacper_Wysocki/backend/daneAktywnychWypozyczen.php';
+  private getWydaneSamochodyURL = 'http://localhost/BD_2020_Kacper_Wysocki/backend/getWydaneSamochody.php';
 
 
   rezerwacje: Rezerwacja[];
@@ -44,6 +45,18 @@ export class RezerwacjeService {
         tap(_=> this.log('wydano samochód')),
         catchError(this.handleError<WydanieSamochodu[]>('addWydanieSamochodu', []))
       );
+  }
+
+  getWydaneSamochdy(): Observable<WydanieSamochodu[]> {
+    return this.http.get(this.getWydaneSamochodyURL)
+      .pipe(
+        map((res)=>{
+          this.samochodyDoOdbioru = res['data'];
+          return this.samochodyDoOdbioru;
+        }),
+        tap(_=> this.log('pobranie wydanych samochodów')),
+        catchError(this.handleError<WydanieSamochodu[]>('getWydanieSamochodu', []))
+      )
   }
 
 
