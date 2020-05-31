@@ -95,24 +95,4 @@ export class PracownikWydanieSamochoduComponent implements OnInit {
     return data.getDate().toString() + "-" + monthNames[data.getMonth()].toString() + "-" + data.getFullYear().toString().substr(-2);
   }
 
-  automaticID(): number {
-    let i: number = 1;
-    let czyZaleziono: boolean;
-    while (true) {
-      czyZaleziono = true;
-      for (let samochod of this.samochodyDoOdbioru) {
-        console.log("I: " + i + " ID_WYDANIA: " + samochod.ID_WYDANIA + " ID_Rezerwacji:" + samochod.ID_REZERWACJI)
-        if (samochod.ID_WYDANIA == i) {
-          czyZaleziono = false;
-        }
-      }
-      if (czyZaleziono) {
-        console.log("zanleziony ID_Wydania = " + i);
-        return i;
-      } else {
-        i++;
-      }
-
-    }
-  }
 }

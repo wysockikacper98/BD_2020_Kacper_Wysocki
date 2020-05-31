@@ -91,13 +91,12 @@ export class SamochodySzczegolyComponent implements OnInit {
       DATA_KONCA_WYPOZYCZENIA: string;
     }
 
-    sendRezerwacja.ID_REZERWACJI = this.automaticID();
     sendRezerwacja.ID_SAMOCHODU = ID_SAMOCHODU;
     sendRezerwacja.ID_KLIENTA = this.zalogowanyKlient;
     sendRezerwacja.DATA_POCZATKU_WYPOZYCZENIA = this.dateToString(this.createDateFromMgbDate(this.fromDate));
     sendRezerwacja.DATA_KONCA_WYPOZYCZENIA = this.dateToString(this.createDateFromMgbDate(this.toDate));
 
-    if (sendRezerwacja.ID_REZERWACJI != null && sendRezerwacja.ID_KLIENTA != null && sendRezerwacja.ID_SAMOCHODU != null) {
+    if (sendRezerwacja.ID_KLIENTA != null && sendRezerwacja.ID_SAMOCHODU != null) {
       this.rezerwacjeService.addRezerwacja(sendRezerwacja).subscribe(rezerwacja => this.rezerwacje = rezerwacja);
       this.dokonanoRezerwacji = true;
     } else {
@@ -111,24 +110,6 @@ export class SamochodySzczegolyComponent implements OnInit {
     return data.getDate().toString() + "-" + monthNames[data.getMonth()].toString() + "-" + data.getFullYear().toString().substr(-2);
   }
 
-  automaticID(): number {
-    let i: number = 1;
-    let czyZaleziono: boolean;
-    while (true) {
-      czyZaleziono = true;
-      for (let rezerwacja of this.rezerwacje) {
-        if (rezerwacja.ID_REZERWACJI == i) {
-          czyZaleziono = false;
-        }
-      }
-      if (czyZaleziono) {
-        return i;
-      } else {
-        i++;
-      }
-
-    }
-  }
 
 
 }
