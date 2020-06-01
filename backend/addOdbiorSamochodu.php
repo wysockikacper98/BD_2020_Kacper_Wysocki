@@ -7,7 +7,6 @@ if(isset($postData) && !empty($postData)){
     //extract data
     $request = json_decode($postData);
 
-//    $ID_WYDANIA = $request->ID_WYDANIA;
     $ID_WYDANIA = $request->ID_WYDANIA;
     $ID_PRACOWNIKA = $request->ID_PRACOWNIKA;
     $DATA_ODBIORU_SAMOCHODU = $request->DATA_ODBIORU_SAMOCHODU;
@@ -17,7 +16,6 @@ if(isset($postData) && !empty($postData)){
 
     $compiled = oci_parse($con, $sql);
 
-//    oci_bind_by_name($compiled, ':ID_WYDANIA', $ID_WYDANIA);
     oci_bind_by_name($compiled, ':ID_WYDANIA', $ID_WYDANIA);
     oci_bind_by_name($compiled, ':ID_PRACOWNIKA', $ID_PRACOWNIKA);
     oci_bind_by_name($compiled, ':DATA_ODBIORU_SAMOCHODU', $DATA_ODBIORU_SAMOCHODU);
