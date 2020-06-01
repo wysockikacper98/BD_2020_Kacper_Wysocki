@@ -1,14 +1,3 @@
-create sequence WYDANIE_SAMOCHODU_SEQ
-/
-
-create sequence REZERWACJA_SEQ
-/
-
-create sequence ODBIOR_SAMOCHODU_SEQ
-/
-
-create sequence WYPOZYCZENIE_SEQ
-/
 
 create table KLIENCI
 (
@@ -83,16 +72,6 @@ create table REZERWACJA
 )
 /
 
-create trigger ID_GENERATE_REZERWACJA
-    before insert
-    on REZERWACJA
-    for each row
-begin
-    select rezerwacja_seq.nextval
-    into :new.ID_REZERWACJI
-    from dual;
-end;
-/
 
 create table WYDANIE_SAMOCHODU
 (
@@ -124,27 +103,7 @@ create table ODBIOR_SAMOCHODU
 )
 /
 
-create trigger ID_GENERATE_ODBIOR
-    before insert
-    on ODBIOR_SAMOCHODU
-    for each row
-begin
-    select odbior_samochodu_seq.nextval
-    into :new.ID_ODBIORU
-    from dual;
-end;
-/
 
-create trigger ID_GENERATE_WYDANIE_SAMOCHODU
-    before insert
-    on WYDANIE_SAMOCHODU
-    for each row
-begin
-    select wydanie_samochodu_seq.nextval
-    into :new.ID_WYDANIA
-    from dual;
-end;
-/
 
 create table WYPOZYCZENIE
 (
@@ -158,16 +117,7 @@ create table WYPOZYCZENIE
 )
 /
 
-create trigger ID_GENERATE_WYPOZYCZENIE
-    before insert
-    on WYPOZYCZENIE
-    for each row
-begin
-    select wypozyczenie_seq.nextval
-    into :new.ID_WYPOZYCZENIA
-    from dual;
-end;
-/
+
 
 create table LOGOWANIE_KLIENCI
 (
@@ -194,5 +144,4 @@ create table LOGOWANIE_PRACOWNICY
         foreign key (ID_PRACOWNIKA) references PRACOWNICY
 )
 /
-
 
