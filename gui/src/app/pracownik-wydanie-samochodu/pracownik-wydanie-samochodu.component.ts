@@ -34,6 +34,7 @@ export class PracownikWydanieSamochoduComponent implements OnInit {
   //Obsługa wyświetlanej zawartosci:
   htmlRezerwacje: boolean = false;
   htmlOdbior: boolean =false;
+  htmlDodawanieSamochodu: boolean = false;
 
   constructor(
     private samochodyService: SamochodyService,
@@ -59,13 +60,15 @@ export class PracownikWydanieSamochoduComponent implements OnInit {
 
 
   openHTML(number: number) {
-    this.htmlRezerwacje = this.htmlOdbior = false;
+    this.htmlRezerwacje = this.htmlOdbior = this.htmlDodawanieSamochodu = false;
     if (number == 1) {
       this.htmlRezerwacje = true;
       this.rezerwacjeService.getDaneAktywnychRezerwacji().subscribe(dane => this.daneAktywnychRezerwacji = dane);
     }else if(number == 2){
       this.htmlOdbior = true;
       this.rezerwacjeService.getDaneAktywnychWypozyczen().subscribe(dane => this.daneAktywnychWypozyczen = dane);
+    }else if (number == 3){
+      this.htmlDodawanieSamochodu = true;
     }
   }
 

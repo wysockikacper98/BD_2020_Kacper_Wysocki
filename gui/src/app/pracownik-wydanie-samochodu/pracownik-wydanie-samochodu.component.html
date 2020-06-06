@@ -1,9 +1,12 @@
 <div class="row" style="margin-bottom: 30px">
-  <div class="col-6 text-center">
+  <div class="col text-center">
     <button type="button" class="btn btn-outline-dark" (click)="openHTML(1)">Rezerwacje</button>
   </div>
-  <div class="col-6 text-center">
+  <div class="col text-center">
     <button type="button" class="btn btn-outline-dark" (click)="openHTML(2)">Odbiór samochodów</button>
+  </div>
+  <div class="col text-center">
+    <button type="button" class="btn btn-outline-dark" (click)="openHTML(3)">Dodaj samochodu</button>
   </div>
 
 </div>
@@ -100,66 +103,77 @@
   </table>
 </div>
 
+<div *ngIf="htmlDodawanieSamochodu">
+  <!--  dodawanie samochodu -->
+  <div class="container justify-content-center col-8 shadow-lg p-3 mb-5 bg-white rounded">
 
-<!--Table-->
-<!--<div class="row">-->
+<!--    MARKA   -->
+    <div class="input-group mb-3">
 
-<!--&lt;!&ndash;  tabela z klientami&ndash;&gt;-->
-<!--  <div class="col">-->
-<!--    <table class="table">-->
-<!--      &lt;!&ndash;Table head&ndash;&gt;-->
-<!--      <thead>-->
-<!--      <tr>-->
-<!--        <th>First Name</th>-->
-<!--        <th>Last Name</th>-->
-<!--        <th> </th>-->
-<!--      </tr>-->
-<!--      </thead>-->
-<!--      &lt;!&ndash;Table head&ndash;&gt;-->
-<!--      &lt;!&ndash;Table body&ndash;&gt;-->
-<!--      <tbody>-->
-<!--      <tr *ngFor="let klient of klienci">-->
-<!--        <td>{{klient.IMIE}}</td>-->
-<!--        <td>{{klient.NAZWISKO}}</td>-->
-<!--        <td>-->
-<!--          <button type="button" class="btn btn-outline-dark">Rezerwacje</button>-->
-<!--        </td>-->
-<!--      </tr>-->
-<!--      </tbody>-->
-<!--      &lt;!&ndash;Table body&ndash;&gt;-->
-<!--    </table>-->
-<!--    &lt;!&ndash;Table&ndash;&gt;-->
-<!--  </div>-->
+      <div class="input-group-prepend">
+        <span class="input-group-text">Marka</span>
+      </div>
+      <input type="text" class="form-control" placeholder="Username" aria-label="Username" >
 
-<!--  <div class="col">-->
+    </div>
 
-<!--&lt;!&ndash;    tabela z rezerwacjami &ndash;&gt;-->
-<!--    <table class="table">-->
-<!--      &lt;!&ndash;Table head&ndash;&gt;-->
-<!--      <thead>-->
-<!--      <tr>-->
-<!--        <th>ID_Samochodu</th>-->
-<!--        <th>Data Początku</th>-->
-<!--        <th>Data Końca</th>-->
-<!--        <th></th>-->
-<!--      </tr>-->
-<!--      </thead>-->
-<!--      &lt;!&ndash;Table head&ndash;&gt;-->
-<!--      &lt;!&ndash;Table body&ndash;&gt;-->
-<!--      <tbody>-->
-<!--      <tr *ngFor="let rezerwacja of rezerwacja">-->
-<!--        <td>{{rezerwacja.ID_SAMOCHODU}}</td>-->
-<!--        <td>{{rezerwacja.DATA_POCZATKU_WYPOZYCZENIA}}</td>-->
-<!--        <td>{{rezerwacja.DATA_KONCA_WYPOZYCZENIA}}</td>-->
-<!--        <td>-->
-<!--          <button type="button" class="btn btn-outline-dark">Info</button>-->
-<!--        </td>-->
+<!--    MODEL   -->
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="basic-addon1">@</span>
+      </div>
+      <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+    </div>
 
-<!--      </tr>-->
-<!--      </tbody>-->
-<!--      &lt;!&ndash;Table body&ndash;&gt;-->
-<!--    </table>-->
-<!--    &lt;!&ndash;Table&ndash;&gt;-->
-<!--  </div>-->
 
-<!--</div>-->
+<!--  ROK   -->
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="basic-addon1">@</span>
+      </div>
+      <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+    </div>
+
+<!--KOLOR-->
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="basic-addon1">@</span>
+      </div>
+      <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+    </div>
+
+<!--ILOSC MIEJSC-->
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="basic-addon1">@</span>
+      </div>
+      <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+    </div>
+
+<!--POJEMONSC BAGAZNIKA-->
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="basic-addon1">@</span>
+      </div>
+      <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+    </div>
+
+<!--RODZAJ SKRZYNI BIEGÓW-->
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="basic-addon1">@</span>
+      </div>
+      <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+    </div>
+
+<!--CENA ZA DZIEN-->
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="basic-addon1">@</span>
+      </div>
+      <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+    </div>
+
+  </div>
+</div>
+
