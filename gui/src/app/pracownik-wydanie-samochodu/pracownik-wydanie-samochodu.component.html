@@ -102,61 +102,60 @@
   <!--  dodawanie samochodu -->
   <div class="container-fluid justify-content-center col-lg-8 shadow-lg p-3 mb-5 bg-white rounded">
 
-<!--    MARKA   -->
+    <!--    MARKA   -->
     <div class="input-group mb-3">
 
-      <input #marka type="text" class="form-control">
+      <input #marka type="text" class="form-control" [(ngModel)]="markaPole">
       <div class="input-group-prepend">
         <span class="input-group-text">Marka</span>
       </div>
 
     </div>
 
-<!--    MODEL   -->
+    <!--    MODEL   -->
     <div class="input-group mb-3">
-      <input #model type="text" class="form-control" >
+      <input #model type="text" class="form-control" [(ngModel)]="modelPole">
       <div class="input-group-prepend">
         <span class="input-group-text">Model</span>
       </div>
     </div>
 
 
-<!--  ROK   -->
+    <!--  ROK   -->
     <div class="input-group mb-3">
-      <input #rok type="number" class="form-control" >
+      <input #rok type="number" class="form-control" [(ngModel)]="rokPole">
       <div class="input-group-prepend">
         <span class="input-group-text">Rok</span>
       </div>
     </div>
 
-<!--KOLOR-->
+    <!--KOLOR-->
     <div class="input-group mb-3">
-      <input #kolor type="text" class="form-control" >
+      <input #kolor type="text" class="form-control" [(ngModel)]="kolorPole">
       <div class="input-group-prepend">
         <span class="input-group-text">Kolor</span>
       </div>
     </div>
 
-<!--ILOSC MIEJSC-->
+    <!--ILOSC MIEJSC-->
     <div class="input-group mb-3">
-      <input #iloscMijesc type="number" class="form-control" >
+      <input #iloscMijesc type="number" class="form-control" [(ngModel)]="iloscPole">
       <div class="input-group-prepend">
         <span class="input-group-text">Ilość miejsc</span>
       </div>
     </div>
 
-<!--POJEMONSC BAGAZNIKA-->
+    <!--POJEMONSC BAGAZNIKA-->
     <div class="input-group mb-3">
-      <input #pojemnoscBagaznika type="number" class="form-control" >
+      <input #pojemnoscBagaznika type="number" class="form-control" [(ngModel)]="pojemnoscPole">
       <div class="input-group-prepend">
         <span class="input-group-text">Pojemnoć bagażnika</span>
       </div>
     </div>
 
-<!--RODZAJ SKRZYNI BIEGÓW-->
+    <!--RODZAJ SKRZYNI BIEGÓW-->
     <div class="input-group mb-3">
-      <select #skrzyniaBiegow class="custom-select">
-        <option selected>Wybierz...</option>
+      <select #skrzyniaBiegow class="custom-select" [(ngModel)]="skrzyniaPole">
         <option value="1">Automatyczna</option>
         <option value="2">Manualna</option>
       </select>
@@ -165,9 +164,9 @@
       </div>
     </div>
 
-<!--CENA ZA DZIEN-->
+    <!--CENA ZA DZIEN-->
     <div class="input-group mb-3">
-      <input #cena type="number" class="form-control">
+      <input #cena type="number" class="form-control" [(ngModel)]="cenaPole">
 
       <div class="input-group-prepend">
         <span class="input-group-text">0.00</span>
@@ -175,12 +174,23 @@
       </div>
     </div>
 
-<!--    button    -->
-    <div class="col text-right">
-      <button class="btn-lg btn-danger" (click)="addSamochod(marka.value, model.value, rok.valueAsNumber, kolor.value, iloscMijesc.valueAsNumber, pojemnoscBagaznika.valueAsNumber, skrzyniaBiegow.value, cena.valueAsNumber)">
-        Dodaj
-      </button>
+    <!--    button    -->
+    <div class="row">
+      <div *ngIf="dodanoSamochod" class="col">
+        <button class="btn-lg btn-success" disabled>Dodano Samochód</button>
+      </div>
+      <div class="col text-right">
+        <button class="btn-lg btn-danger"
+                [disabled]="!cenaPole || !skrzyniaPole || !pojemnoscPole || !iloscPole || !kolorPole || !rokPole || !modelPole || !markaPole"
+                (click)="addSamochod(marka.value, model.value, rok.valueAsNumber, kolor.value, iloscMijesc.valueAsNumber, pojemnoscBagaznika.valueAsNumber, skrzyniaBiegow.value, cena.valueAsNumber);
+                         marka.value = ''; model.value = ''; rok.value = ''; kolor.value = ''; iloscMijesc.value = ''; pojemnoscBagaznika.value = ''; skrzyniaBiegow.value = ''; cena.value = ''">
+          <img src="assets/icons/addSamochod.png" width="64" alt="Dodaj">
+        </button>
+      </div>
     </div>
+
+
+
 
   </div>
 </div>

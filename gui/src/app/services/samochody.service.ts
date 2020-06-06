@@ -31,6 +31,7 @@ export class SamochodyService {
   private klientURL = 'http://localhost/BD_2020_Kacper_Wysocki/backend/getKlient.php';
   private klienciURL = 'http://localhost/BD_2020_Kacper_Wysocki/backend/klienciLista.php';
   private samochodURL = 'http://localhost/BD_2020_Kacper_Wysocki/backend/getSamochod.php';
+  private addSamochodURL = 'http://localhost/BD_2020_Kacper_Wysocki/backend/addSamochod.php';
 
   samochody: Samochody[];
   samochod: Samochody;
@@ -71,7 +72,17 @@ export class SamochodyService {
       );
   }
 
-
+addSamochod(samochod: Samochody): Observable<Samochody[]>{
+    return this.http.post( this.addSamochodURL, samochod)
+      .pipe(
+        map((res) => {
+          this.samochody = res['data'];
+          return this.samochody;
+        }),
+        tap(_ => this.log('add Samochod')),
+        catchError(this.handleError<Samochody[]>('addSamochod', []))
+      );
+}
 
 
   getSamochody(): Observable<Samochody[]> {

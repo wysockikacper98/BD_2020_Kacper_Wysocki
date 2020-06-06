@@ -31,12 +31,22 @@ export class PracownikWydanieSamochoduComponent implements OnInit {
   daneAktywnychWypozyczen: DaneAktywnychWYpozyczen[];
   samochodyDoOdbioru: WydanieSamochodu[];
   odbiorSamochoduList: OdbiorSamochodu[];
+  samochodyList: Samochody[];
 
 
   //Obsługa wyświetlanej zawartosci:
   htmlRezerwacje: boolean = false;
   htmlOdbior: boolean =false;
   htmlDodawanieSamochodu: boolean = false;
+  cenaPole: any;
+  skrzyniaPole: any;
+  pojemnoscPole: any;
+  iloscPole: any;
+  kolorPole: any;
+  rokPole: any;
+  modelPole: any;
+  markaPole: any;
+  dodanoSamochod: boolean = false;
 
   constructor(
     private samochodyService: SamochodyService,
@@ -71,6 +81,7 @@ export class PracownikWydanieSamochoduComponent implements OnInit {
       this.rezerwacjeService.getDaneAktywnychWypozyczen().subscribe(dane => this.daneAktywnychWypozyczen = dane);
     }else if (number == 3){
       this.htmlDodawanieSamochodu = true;
+      this.dodanoSamochod = false;
     }
   }
 
@@ -148,8 +159,9 @@ export class PracownikWydanieSamochoduComponent implements OnInit {
     else if (skrzyniaBiegow == '2') nowySamochod.RODZAJ_SKRZYNI_BIEGOW = "M";
     nowySamochod.CENA_ZA_DZIEN = cena;
 
+    this.samochodyService.addSamochod(nowySamochod).subscribe(dane => this.samochodyList = dane);
 
-    console.log(nowySamochod);
+    this.dodanoSamochod = true;
 
   }
 }
