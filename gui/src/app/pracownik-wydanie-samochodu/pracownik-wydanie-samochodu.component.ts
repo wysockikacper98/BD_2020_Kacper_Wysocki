@@ -11,6 +11,8 @@ import {Data} from "@angular/router";
 import {DaneAktywnychWYpozyczen} from "../interfaceBazyDanych/dane-aktywnych-wypozyczen";
 import {SendOdbiorSamochodu} from "../interfaceBazyDanych/send-odbior-samochodu";
 import {OdbiorSamochodu} from "../interfaceBazyDanych/odbior-samochodu";
+import {Samochody} from "../interfaceBazyDanych/samochody";
+import {inlineLocales} from "@angular-devkit/build-angular/src/utils/process-bundle";
 
 @Component({
   selector: 'app-pracownik-wydanie-samochodu',
@@ -116,15 +118,38 @@ export class PracownikWydanieSamochoduComponent implements OnInit {
   }
 
 
-
-
-
-
-
   getToDayString(): string {
     const monthNames = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
     let data = new Date();
     return data.getDate().toString() + "-" + monthNames[data.getMonth()].toString() + "-" + data.getFullYear().toString().substr(-2);
   }
 
+  addSamochod(marka: string, model: string, rok: number, kolor: string, iloscMijesc: number, pojemnoscBagaznika: number, skrzyniaBiegow: string, cena: number) {
+    let nowySamochod: Samochody = new class implements Samochody {
+      ID_SAMOCHODU: number;
+      ID_LOKALU: number;
+      MARKA: string;
+      MODEL: string;
+      ROK: number;
+      KOLOR: string;
+      ILOSC_MIEJSC: number;
+      POJEMNOSC_BAGAZNIKA: number;
+      RODZAJ_SKRZYNI_BIEGOW: string;
+      CENA_ZA_DZIEN: number;
+    }
+    nowySamochod.ID_LOKALU = 1;
+    nowySamochod.MARKA = marka;
+    nowySamochod.MODEL = model;
+    nowySamochod.ROK = rok;
+    nowySamochod.KOLOR = kolor;
+    nowySamochod.ILOSC_MIEJSC = iloscMijesc;
+    nowySamochod.POJEMNOSC_BAGAZNIKA = pojemnoscBagaznika;
+    if (skrzyniaBiegow == "1") nowySamochod.RODZAJ_SKRZYNI_BIEGOW = "A";
+    else if (skrzyniaBiegow == '2') nowySamochod.RODZAJ_SKRZYNI_BIEGOW = "M";
+    nowySamochod.CENA_ZA_DZIEN = cena;
+
+
+    console.log(nowySamochod);
+
+  }
 }
