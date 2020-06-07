@@ -1,5 +1,4 @@
-<div>
-  <body class="text-center">
+<div *ngIf="ekranLogowania" class="text-center">
   <form class="form-signin">
 
     <h1 class="h3 mb-3 font-weight-normal">Zaloguj się</h1>
@@ -9,22 +8,74 @@
     <input #haslo type="password" class="form-control" placeholder="Hasło"/>
 
 
-    <button class="btn btn-outline-success" (click)="zaloguj(login.value, haslo.value); login.value = ''; haslo.value=''" style="margin-bottom: 30px">
+    <button type="button" class="btn btn-outline-success"
+            (click)="zaloguj(login.value, haslo.value); login.value = ''; haslo.value=''" style="margin-bottom: 10px; margin-top: 10px;">
       Zaloguj
     </button>
-
-<!--    PO PODANIU ODPOWIEDNICH DANYCH LOGOWANIA  -->
-    <div *ngIf="klient">
-
-      <button type="button" class="btn btn-outline-info" routerLink="/filter">Zalogowano na konto Klienta</button>
-
-    </div>
-    <div *ngIf="pracownik">
-      <button type="button" class="btn btn-outline-info" routerLink="/pracownik-wydanie-samochodu">Zalogowano na konto Pracownika</button>
-
-    </div>
-
-
+<br>
+    <button type="button" class="btn btn-outline-info" (click)="ekranLogowania=false">
+      Zarejestruj się
+    </button>
   </form>
-  </body>
+</div>
+
+<div *ngIf="!ekranLogowania">
+
+  <div *ngIf="!wolnyLogin" class="text-center"> <!-- Podawanie logiu oraz hasła --->
+
+    <form class="form-signin">
+
+      <h1 class="h3 mb-3 font-weight-normal">Zarejestruj się</h1>
+
+      <input #nowyLogin type="text" class="form-control" placeholder="Login"  [(ngModel)]="nowyLoginPole" [ngModelOptions]="{standalone: true}">
+
+      <input #noweHaslo type="password" class="form-control" placeholder="Hasło" [(ngModel)]="noweHasloPole" [ngModelOptions]="{standalone: true}">
+
+      <input #noweHasloPowtorz type="password" class="form-control" placeholder="Powtórz Hasło" [(ngModel)]="noweHasloPowtorzPole" [ngModelOptions]="{standalone: true}">
+
+
+      <br>
+      <div class="row">
+
+        <div class="col">
+          <button type="button" class="btn btn-outline-success" [disabled]="!nowyLoginPole || !noweHasloPowtorzPole || !noweHasloPole"
+                  (click)="czyLoginWolny(nowyLogin.value, noweHaslo.value, noweHasloPowtorz.value)">
+            Dalej
+          </button>
+        </div>
+
+
+        <div class="col">
+          <button type="button" class="btn btn-outline-danger" (click)="ekranLogowania=true">
+            Cofnij
+          </button>
+        </div>
+
+      </div>
+    </form>
+
+  </div>
+
+  <div *ngIf="wolnyLogin" class="text-center"> <!-- Podawanie danych klienta --->
+
+    <form class="form-signin">
+
+      <h1 class="h3 mb-3 font-weight-normal">Zarejestruj się</h1>
+
+      <input #imie type="text" class="form-control" placeholder="Imie" [(ngModel)]="imiePole" [ngModelOptions]="{standalone: true}">
+      <input #nazwisko type="text" class="form-control" placeholder="Nazwisko" [(ngModel)]="nazwiskoPole" [ngModelOptions]="{standalone: true}">
+      <input #nrTel type="number" class="form-control" placeholder="Nr Telefonu" [(ngModel)]="nrTelPole" [ngModelOptions]="{standalone: true}">
+      <input #Nip type="number" class="form-control" placeholder="NIP" [(ngModel)]="NipPole" [ngModelOptions]="{standalone: true}">
+
+
+
+      <br>
+      <button class="btn btn-outline-success" [disabled]="!imiePole || !nazwiskoPole || !nrTelPole || !NipPole" (click)="ekranLogowania=false">
+        Zarejestruj się
+      </button>
+    </form>
+
+  </div>
+
+
 </div>
