@@ -15,6 +15,7 @@ if(isset($postData) && !empty($postData)){
     $ID_SAMOCHODU = $request->ID_SAMOCHODU;
     $DATA_POCZATKU_WYPOZYCZENIA = $request->DATA_POCZATKU_WYPOZYCZENIA;
     $DATA_KONCA_WYPOZYCZENIA = $request->DATA_KONCA_WYPOZYCZENIA;
+    $EMAIL = $request->EMAIL;
 
 
     $sql = 'INSERT INTO REZERWACJA(ID_KLIENTA, ID_SAMOCHODU, DATA_POCZATKU_WYPOZYCZENIA, DATA_KONCA_WYPOZYCZENIA)'.
@@ -50,6 +51,20 @@ if(isset($postData) && !empty($postData)){
         }
 
         echo json_encode(['data' => $rezerwacja]);
+
+        if(!empty($EMAIL)) {
+            //wysyłanie maila z potwierdzeniem rezerwacji
+            $to_email = $EMAIL;
+            $subject = "Potwierdzenie rezerwacji";
+            $body = "Dzień dobry, \n Zamówienie zostało zapisane. Samochód o numerze: $ID_SAMOCHODU \n będzie oczekiwał na Ciebie w dniach: $DATA_POCZATKU_WYPOZYCZENIA - $DATA_KONCA_WYPOZYCZENIA";
+            $headers = "From: Wypożyczalnia Projekt";
+
+            if (mail($to_email, $subject, $body, $headers)) {
+                echo "Email successfully sent to $to_email...";
+            } else {
+                echo "Email sending failed...";
+            }
+        }
 
     }else{
         http_response_code(404);

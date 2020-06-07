@@ -27,6 +27,7 @@ export class SamochodySzczegolyComponent implements OnInit {
   toDate: NgbDate | null = null;
 
   zalogowanyKlient: number;
+  emailPole: string;
 
 
   constructor(
@@ -89,12 +90,14 @@ export class SamochodySzczegolyComponent implements OnInit {
       ID_SAMOCHODU: number;
       DATA_POCZATKU_WYPOZYCZENIA: string;
       DATA_KONCA_WYPOZYCZENIA: string;
+      EMAIL: string;
     }
 
     sendRezerwacja.ID_SAMOCHODU = ID_SAMOCHODU;
     sendRezerwacja.ID_KLIENTA = this.zalogowanyKlient;
     sendRezerwacja.DATA_POCZATKU_WYPOZYCZENIA = this.dateToString(this.createDateFromMgbDate(this.fromDate));
     sendRezerwacja.DATA_KONCA_WYPOZYCZENIA = this.dateToString(this.createDateFromMgbDate(this.toDate));
+    sendRezerwacja.EMAIL = this.emailPole;
 
     if (sendRezerwacja.ID_KLIENTA != null && sendRezerwacja.ID_SAMOCHODU != null) {
       this.rezerwacjeService.addRezerwacja(sendRezerwacja).subscribe(rezerwacja => this.rezerwacje = rezerwacja);
