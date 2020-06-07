@@ -14,6 +14,7 @@ export class FilterComponent implements OnInit {
   toDate: NgbDate | null = null;
   //senging message
   data: string;
+  // wybranaSkrzynia: string = "Dowolna";
 
   constructor(
     public calendar: NgbCalendar,
