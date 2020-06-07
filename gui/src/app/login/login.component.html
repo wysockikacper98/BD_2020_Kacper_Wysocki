@@ -70,8 +70,14 @@
 
 
       <br>
-      <button class="btn btn-outline-success" [disabled]="!imiePole || !nazwiskoPole || !nrTelPole || !NipPole" (click)="ekranLogowania=false">
+      <button *ngIf="!udaneDodanieKlienta" class="btn btn-outline-success" [disabled]="!imiePole || !nazwiskoPole || !nrTelPole || !NipPole" (click)="addKlient(); udaneDodanieKlienta = true;">
         Zarejestruj się
+      </button>
+      <button *ngIf="udaneDodanieKlienta" class="btn btn-outline-success" disabled style="margin-bottom: 10px;">
+       Pomyślnie zarejestrowano
+      </button>
+      <button *ngIf="udaneDodanieKlienta" class="btn btn-success" (click)="addLoginKlienta(); ekranLogowania = true; getPassyKlient()">
+        Zaloguj się po raz pierwszy!
       </button>
     </form>
 

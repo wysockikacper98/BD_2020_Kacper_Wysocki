@@ -5,6 +5,9 @@ import {catchError, map, tap} from "rxjs/operators";
 import {PassPracownik} from "../interfaceBazyDanych/pass-pracownik";
 import {HttpClient} from "@angular/common/http";
 import {MessagesService} from "../messages/messages.service";
+import {Klienci} from "../interfaceBazyDanych/klienci";
+import {WydanieSamochodu} from "../interfaceBazyDanych/wydanie-samochodu";
+import {LogowanieKlienci} from "../interfaceBazyDanych/logowanie-klienci";
 
 @Injectable({
   providedIn: 'root'
@@ -19,9 +22,14 @@ export class LoginService {
 
   private passyKlientURL = 'http://localhost/BD_2020_Kacper_Wysocki/backend/getPassKlienci.php';
   private passyPracownikURL = 'http://localhost/BD_2020_Kacper_Wysocki/backend/getPassPracownicy.php';
+  private dodawanieKlientaURL = 'http://localhost/BD_2020_Kacper_Wysocki/backend/addKlient.php';
+  private dodawanieLoginKlienta = 'http://localhost/BD_2020_Kacper_Wysocki/backend/addLogowanieKlient.php';
 
   passyKlient: PassKlient[];
   passyPracownik: PassPracownik[];
+
+  dodanyKlient: Klienci;
+  dodanyLogin: LogowanieKlienci;
 
   constructor(private http: HttpClient,
               private messageService: MessagesService) {
@@ -49,6 +57,31 @@ export class LoginService {
         tap(_ => this.log('pobranie passów pracowników')),
         catchError(this.handleError<PassPracownik[]>('getPassyPracownik', []))
       );
+  }
+
+  addKlient(klient: Klienci): Observable<Klienci>{
+    return this.http.post(this.dodawanieKlientaURL, klient)
+      .pipe(
+        map((res) =>{
+          this.dodanyKlient = res['data'];
+          return this.dodanyKlient;
+        }),
+        tap(_=> this.log('dodano Klienta')),
+        catchError(this.handleError<Klienci>('addKlienci', ))
+      );
+  }
+
+
+  addLogowanieKlient(logowanie: LogowanieKlienci): Observable<LogowanieKlienci>{
+      return this.http.post(this.dodawanieLoginKlienta, logowanie)
+        .pipe(
+          map((res) =>{
+            this.dodanyLogin = res['data'];
+            return this.dodanyLogin;
+          }),
+          tap(_=> this.log('dodano Logowanie')),
+          catchError(this.handleError<LogowanieKlienci>('addLogowanieKlienci', ))
+        );
   }
 
   zalogowanoJakoPracownik(id: number) {

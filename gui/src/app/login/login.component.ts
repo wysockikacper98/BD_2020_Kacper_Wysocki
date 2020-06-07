@@ -6,6 +6,7 @@ import {Klienci} from "../interfaceBazyDanych/klienci";
 import {Pracownicy} from "../interfaceBazyDanych/pracownicy";
 import {PracownicyService} from "../services/pracownicy.service";
 import {Router} from "@angular/router";
+import {LogowanieKlienci} from "../interfaceBazyDanych/logowanie-klienci";
 
 
 @Component({
@@ -17,6 +18,9 @@ export class LoginComponent implements OnInit {
 
   passyKlienci: PassKlient[];
   passyPracownicy: PassPracownik[];
+
+  dodanyKlient: Klienci;
+  dodanyLoginKlienta: LogowanieKlienci;
 
   zalogowanyKlient: number;
   zalogownayPracownik: number;
@@ -34,6 +38,7 @@ export class LoginComponent implements OnInit {
   nazwiskoPole: any;
   nrTelPole: any;
   NipPole: any;
+  udaneDodanieKlienta: boolean = false;
 
 
   constructor(private loginService: LoginService,
@@ -97,6 +102,14 @@ export class LoginComponent implements OnInit {
           znaleziono = true;
         }
       }
+      if(!znaleziono){
+        for (let pracownik of this.passyPracownicy) {
+          if (pracownik.LOGIN == login) {
+            znaleziono = true;
+          }
+        }
+      }
+
       if (!znaleziono) {
         this.wolnyLogin = true;
       }else{
@@ -109,6 +122,42 @@ export class LoginComponent implements OnInit {
       this.noweHasloPowtorzPole = null;
     }
   }
+
+
+  addKlient() {
+    let sendKlient: Klienci = new class implements Klienci{
+      ID_KLIENTA: number;
+      IMIE: string;
+      NAZWISKO: string;
+      NIP: number;
+      NR_TELEFONU: number;
+    }
+    sendKlient.IMIE = this.imiePole;
+    sendKlient.NAZWISKO = this.nazwiskoPole;
+    sendKlient.NIP = this.NipPole;
+    sendKlient.NR_TELEFONU = this.nrTelPole
+
+    this.loginService.addKlient(sendKlient).subscribe(dane => this.dodanyKlient = dane);
+
+  }
+
+  addLoginKlienta(){
+    let sendLogowanie: LogowanieKlienci = new class implements LogowanieKlienci {
+      HASLO: string;
+      ID_KLIENTA: number;
+      ID_LOGOWANIE_KLIENT: number;
+      LOGIN: string;
+    }
+    sendLogowanie.ID_KLIENTA = this.dodanyKlient.ID_KLIENTA;
+    sendLogowanie.LOGIN = this.nowyLoginPole;
+    sendLogowanie.HASLO = this.noweHasloPole;
+
+    this.loginService.addLogowanieKlient(sendLogowanie).subscribe(dane => this.dodanyLoginKlienta = dane);
+    console.log("dodano dane logowania klienta");
+  }
+
+
+
 
 
 }
