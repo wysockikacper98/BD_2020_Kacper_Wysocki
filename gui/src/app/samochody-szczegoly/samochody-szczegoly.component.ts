@@ -83,7 +83,7 @@ export class SamochodySzczegolyComponent implements OnInit {
     }
   }
 
-  addRezerwacja(ID_SAMOCHODU: number) {
+  addRezerwacja(ID_SAMOCHODU: number, email: string) {
     const sendRezerwacja: SendRezerwacja = new class implements SendRezerwacja {
       ID_REZERWACJI: number;
       ID_KLIENTA: number;
@@ -97,7 +97,7 @@ export class SamochodySzczegolyComponent implements OnInit {
     sendRezerwacja.ID_KLIENTA = this.zalogowanyKlient;
     sendRezerwacja.DATA_POCZATKU_WYPOZYCZENIA = this.dateToString(this.createDateFromMgbDate(this.fromDate));
     sendRezerwacja.DATA_KONCA_WYPOZYCZENIA = this.dateToString(this.createDateFromMgbDate(this.toDate));
-    sendRezerwacja.EMAIL = this.emailPole;
+    sendRezerwacja.EMAIL = email;
 
     if (sendRezerwacja.ID_KLIENTA != null && sendRezerwacja.ID_SAMOCHODU != null) {
       this.rezerwacjeService.addRezerwacja(sendRezerwacja).subscribe(rezerwacja => this.rezerwacje = rezerwacja);

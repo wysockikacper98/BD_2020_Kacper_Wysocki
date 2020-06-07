@@ -59,11 +59,7 @@ if(isset($postData) && !empty($postData)){
             $body = "Dzień dobry, \n Zamówienie zostało zapisane. Samochód o numerze: $ID_SAMOCHODU \n będzie oczekiwał na Ciebie w dniach: $DATA_POCZATKU_WYPOZYCZENIA - $DATA_KONCA_WYPOZYCZENIA";
             $headers = "From: Wypożyczalnia Projekt";
 
-            if (mail($to_email, $subject, $body, $headers)) {
-                echo "Email successfully sent to $to_email...";
-            } else {
-                echo "Email sending failed...";
-            }
+            mail($to_email, $subject, $body, $headers);
         }
 
     }else{

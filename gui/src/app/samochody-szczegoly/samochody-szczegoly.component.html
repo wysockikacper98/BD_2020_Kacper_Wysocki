@@ -91,7 +91,7 @@
           <span class="input-group-text">Email:</span>
         </div>
 
-        <input type="text" class="form-control" placeholder="example@gmail.com" [(ngModel)]="emailPole">
+        <input #email type="text" class="form-control" placeholder="example@gmail.com">
       </div>
 
       <div class="row" style="margin-top: 100px">
@@ -101,7 +101,7 @@
         </div>
 
         <div *ngIf="!dokonanoRezerwacji" class="col text-right"><!-- Button -->
-          <button class="btn-lg btn-danger" (click)="addRezerwacja(samochod.ID_SAMOCHODU);">
+          <button class="btn-lg btn-danger" (click)="addRezerwacja(samochod.ID_SAMOCHODU, email.value);">
             Zarezerwuj
           </button>
         </div>
