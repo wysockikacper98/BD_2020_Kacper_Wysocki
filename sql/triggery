@@ -9,9 +9,15 @@ create sequence REZERWACJA_SEQ
 create sequence ODBIOR_SAMOCHODU_SEQ
 /
 
-create sequence WYPOZYCZENIE_SEQ
+
+create sequence SAMOCHODY_SEQ
 /
 
+create sequence KLIENT_SEQ
+/
+
+create sequence LOGOWANIEKLIENT_SEQ
+/
 
 create trigger ID_GENERATE_REZERWACJA
     before insert
@@ -25,16 +31,6 @@ end;
 /
 
 
-create trigger ID_GENERATE_WYPOZYCZENIE
-    before insert
-    on WYPOZYCZENIE
-    for each row
-begin
-    select wypozyczenie_seq.nextval
-    into :new.ID_WYPOZYCZENIA
-    from dual;
-end;
-/
 
 create trigger ID_GENERATE_ODBIOR
     before insert
@@ -54,6 +50,40 @@ create trigger ID_GENERATE_WYDANIE_SAMOCHODU
 begin
     select wydanie_samochodu_seq.nextval
     into :new.ID_WYDANIA
+    from dual;
+end;
+/
+
+create trigger ID_GENERATE_KLIENT
+    before insert
+    on KLIENCI
+    for each row
+begin
+    select klient_seq.nextval
+    into :new.ID_KLIENTA
+    from dual;
+end;
+/
+
+
+create trigger ID_GENERATE_SAMOCHODY
+    before insert
+    on SAMOCHODY
+    for each row
+begin
+    select samochody_seq.nextval
+    into :new.ID_SAMOCHODU
+    from dual;
+end;
+/
+
+create trigger ID_GENERATE_LOGOWANIE_KLIENT
+    before insert
+    on LOGOWANIE_KLIENCI
+    for each row
+begin
+    select logowanieKlient_seq.nextval
+    into :new.ID_LOGOWANIE_KLIENT
     from dual;
 end;
 /

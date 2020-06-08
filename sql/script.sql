@@ -105,19 +105,6 @@ create table ODBIOR_SAMOCHODU
 
 
 
-create table WYPOZYCZENIE
-(
-    ID_WYPOZYCZENIA NUMBER not null,
-    ID_ODBIORU      NUMBER,
-    ZAROBEK         NUMBER,
-    constraint WYPOZYCZENIE_PK
-        primary key (ID_WYPOZYCZENIA),
-    constraint WYPOZYCZENIE_FK_ODBIOR
-        foreign key (ID_ODBIORU) references ODBIOR_SAMOCHODU
-)
-/
-
-
 
 create table LOGOWANIE_KLIENCI
 (

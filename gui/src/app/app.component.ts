@@ -11,6 +11,7 @@ export class AppComponent implements OnInit{
   title = 'Projekt';
   zalogowanyKlient: number;
   zalogownayPracownik: number;
+  isCollapsed: boolean = true;
 
   constructor(private loginService: LoginService) {
   }

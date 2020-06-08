@@ -1,31 +1,28 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top shadow p-3 mb-5">
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark shadow p-3 mb-5">
   <a class="navbar-brand" routerLink="/filter">
     <img src="assets/vehicle.png" width="64" height="64" class="d-inline-block align-top" alt="404">
   </a>
   <span class="navbar-brand mb-0 h1">Wypożyczalnia</span>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+  <button class="navbar-toggler d-lg-none" type="button" (click)="isCollapsed = !isCollapsed"
+          [attr.aria-expanded]="!isCollapsed" aria-controls="navbarsExampleDefault" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
 
-  <div class="collapse navbar-collapse " id="navbarSupportedContent">
+  <div class="collapse navbar-collapse" id="navbarsExampleDefault" [ngbCollapse]="isCollapsed">
     <ul class="navbar-nav mr-auto">
-      <!--      <li class="nav-item active">-->
-      <!--              <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">-->
-      <!--      </li>-->
-      <!--      <li class="nav-item">-->
-      <!--        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>-->
-      <!--      </li>-->
 
     </ul>
     <form *ngIf="zalogowanyKlient == null && zalogownayPracownik == null" class="form-inline my-2 my-lg-1">
-      <a class="btn btn-dark" routerLink="/login" role="button">Zaloguj</a>
-<!--      <a class="btn btn-dark" href="#" role="button">Zarejestruj</a>-->
+      <button type="button" class="btn btn-dark" routerLink="/login" (click)="isCollapsed=!isCollapsed">Zaloguj</button>
     </form>
 
-    <button *ngIf="zalogowanyKlient != null" type="button" class="btn btn-dark">Zalogowano jako Klient o id: {{zalogowanyKlient}}</button>
-    <button *ngIf="zalogownayPracownik != null" type="button" class="btn btn-dark">Zalogowano jako Pracownik o id: {{zalogownayPracownik}}</button>
-    <a class="btn btn-dark" routerLink="/login" role="button" (click)="wyloguj()">Wyloguj</a>
+    <form *ngIf="zalogowanyKlient != null || zalogownayPracownik != null" class="form-inline my-2 my-lg-1">
+      <button *ngIf="zalogowanyKlient != null" type="button" class="btn btn-dark" disabled>Zalogowano jako Klient o
+        id: {{zalogowanyKlient}}</button>
+      <button *ngIf="zalogownayPracownik != null" type="button" class="btn btn-dark" disabled>Zalogowano jako Pracownik o
+        id: {{zalogownayPracownik}}</button>
+    </form>
+    <a class="btn btn-dark" routerLink="/login" role="button" (click)="wyloguj(); isCollapsed = !isCollapsed">Wyloguj</a>
 
   </div>
 </nav>
@@ -35,7 +32,6 @@
 <div class="container-fluid" style="margin:120px 10px 120px 5px;">
   <router-outlet></router-outlet>
 </div>
-
 
 
 <!--<app-messages></app-messages>-->
