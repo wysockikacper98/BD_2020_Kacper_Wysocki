@@ -45,7 +45,7 @@
       <td>{{dane.DATA_POCZATKU_WYPOZYCZENIA}}</td>
       <td>{{dane.DATA_KONCA_WYPOZYCZENIA}}</td>
       <td class="text-center" style="width: 5%">
-        <button type="button" class="btn btn-outline-success" (click)="wydanieKluczy(dane.ID_REZERWACJI)">
+        <button type="button" class="btn btn-outline-success" (click)="wydanieKluczy(dane.ID_REZERWACJI); refreshRezerwacje();">
           <img src="assets/icons/wydanieKluczy.png" alt="Wydanie Kluczy">
         </button>
       </td>
@@ -89,7 +89,7 @@
       <td>{{wypozyczenie.DATA_POCZATKU_WYPOZYCZENIA}}</td>
       <td>{{wypozyczenie.DATA_KONCA_WYPOZYCZENIA}}</td>
       <td class="text-center" style="width: 5%">
-        <button type="button" class="btn btn-outline-success" (click)="addOdbiorSamochodu(wypozyczenie.ID_WYDANIA)">
+        <button type="button" class="btn btn-outline-success" (click)="addOdbiorSamochodu(wypozyczenie.ID_WYDANIA); refreshWypozyczenia()">
           <img src="assets/icons/odbriorSamochodu.png" alt="Odbiór Samochodu">
         </button>
       </td>

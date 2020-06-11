@@ -69,7 +69,12 @@ export class PracownikWydanieSamochoduComponent implements OnInit {
   getKlienci(): void {
     this.samochodyService.getKlienci().subscribe(klienci => this.klienci = klienci);
   }
-
+  refreshRezerwacje(){
+    this.rezerwacjeService.getDaneAktywnychRezerwacji().subscribe(dane => this.daneAktywnychRezerwacji = dane);
+  }
+  refreshWypozyczenia(){
+    this.rezerwacjeService.getDaneAktywnychWypozyczen().subscribe(dane => this.daneAktywnychWypozyczen = dane);
+  }
 
   openHTML(number: number) {
     this.htmlRezerwacje = this.htmlOdbior = this.htmlDodawanieSamochodu = false;
@@ -103,7 +108,6 @@ export class PracownikWydanieSamochoduComponent implements OnInit {
       console.log("Nie podano wszysktich potrzebnych informancji");
     }
 
-    this.rezerwacjeService.getDaneAktywnychRezerwacji().subscribe(dane => this.daneAktywnychRezerwacji = dane);
   }
 
 

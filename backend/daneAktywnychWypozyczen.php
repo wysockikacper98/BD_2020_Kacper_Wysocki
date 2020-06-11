@@ -3,26 +3,17 @@ require 'connect.php';
 
 $daneWypozyczen =[];
 
-$sql = "
-select w.ID_WYDANIA, IMIE, NAZWISKO, S.ID_SAMOCHODU, MARKA, MODEL, DATA_POCZATKU_WYPOZYCZENIA, DATA_KONCA_WYPOZYCZENIA
-from  WYDANIE_SAMOCHODU w
-left join ODBIOR_SAMOCHODU o
-on w.ID_WYDANIA = o.ID_WYDANIA
-left join REZERWACJA R on w.ID_REZERWACJI = R.ID_REZERWACJI
-left join KLIENCI K on R.ID_KLIENTA = K.ID_KLIENTA
-left join SAMOCHODY S on R.ID_SAMOCHODU = S.ID_SAMOCHODU
-where o.ID_WYDANIA is null
-
-order by DATA_KONCA_WYPOZYCZENIA
-";
-
+$sql = "begin daneAktywnychWypozyczen(:cursbv); end;";
+$curs = oci_new_cursor($con);
 $stid = oci_parse($con, $sql);
+oci_bind_by_name($stid, ":cursbv", $curs, -1, OCI_B_CURSOR);
+
 
 oci_execute($stid);
 
-if(oci_execute($stid)){
+if(oci_execute($curs)){
     $cr = 0;
-    while ($row = oci_fetch_array($stid, OCI_BOTH)){
+    while ($row = oci_fetch_array($curs, OCI_ASSOC+OCI_RETURN_NULLS)){
         $daneWypozyczen[$cr]['ID_WYDANIA'] = $row['ID_WYDANIA'];
         $daneWypozyczen[$cr]['IMIE'] = $row['IMIE'];
         $daneWypozyczen[$cr]['NAZWISKO'] = $row['NAZWISKO'];

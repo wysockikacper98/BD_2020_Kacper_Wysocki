@@ -3,23 +3,19 @@ require 'connect.php';
 
 $daneRezerwacji = [];
 
-$sql = "
-select IMIE, NAZWISKO, s.ID_SAMOCHODU, MODEL, MARKA, r.ID_REZERWACJI, r.DATA_POCZATKU_WYPOZYCZENIA, r.DATA_KONCA_WYPOZYCZENIA
-from REZERWACJA r
-left join WYDANIE_SAMOCHODU w
-on r.ID_REZERWACJI = w.ID_REZERWACJI
-left join SAMOCHODY s on r.ID_SAMOCHODU = s.ID_SAMOCHODU
-left join KLIENCI k on r.ID_KLIENTA = k.ID_KLIENTA
-where w.ID_REZERWACJI is null
-order by r.DATA_POCZATKU_WYPOZYCZENIA";
+$sql = "begin daneAktywnychRezerwacji(:cursbv); end;";
+$curs = oci_new_cursor($con);
 
 $stid = oci_parse($con, $sql);
 
+oci_bind_by_name($stid, ":cursbv", $curs, -1, OCI_B_CURSOR);
+
+
 oci_execute($stid);
 
-if(oci_execute($stid)){
+if(oci_execute($curs)){
     $cr = 0;
-    while ($row = oci_fetch_array($stid, OCI_BOTH)){
+    while ($row = oci_fetch_array($curs, OCI_ASSOC+OCI_RETURN_NULLS)){
         $daneRezerwacji[$cr]['IMIE'] = $row['IMIE'];
         $daneRezerwacji[$cr]['NAZWISKO'] = $row['NAZWISKO'];
         $daneRezerwacji[$cr]['ID_REZERWACJI'] = $row['ID_REZERWACJI'];

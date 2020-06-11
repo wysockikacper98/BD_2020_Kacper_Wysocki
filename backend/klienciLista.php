@@ -2,14 +2,17 @@
 require 'connect.php';
 
 $klienci = [];
-$sql = "SELECT * FROM klienci";
+$sql = "begin getKlienci(:cursbv); end;";
+$curs = oci_new_cursor($con);
 
 $stid = oci_parse($con, $sql);
+oci_bind_by_name($stid, ":cursbv", $curs, -1, OCI_B_CURSOR);
+
 oci_execute($stid);
 
-if (oci_execute($stid)) {
+if (oci_execute($curs)) {
     $cr = 0;
-    while ($row = oci_fetch_array($stid, OCI_BOTH)) {
+    while ($row = oci_fetch_array($curs, OCI_ASSOC+OCI_RETURN_NULLS)) {
             $klienci[$cr]['ID_KLIENTA']= $row['ID_KLIENTA'];
             $klienci[$cr]['IMIE']= $row['IMIE'];
             $klienci[$cr]['NAZWISKO']= $row['NAZWISKO'];

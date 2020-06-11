@@ -79,7 +79,7 @@ export class RezerwacjeService {
 
 
   addRezerwacja(rezerwacja: SendRezerwacja): Observable<Rezerwacja[]> {
-    this.getRezerwacja();//TODO: sprawdzić czy ten wiersz jest potrzebny do poprawnego działania kodu(raczej nie)
+    this.getRezerwacja();
     return this.http.post(this.addRezerwacjeURL, rezerwacja)
       .pipe(map((res)=>{
         this.rezerwacje.push(res['data']);
