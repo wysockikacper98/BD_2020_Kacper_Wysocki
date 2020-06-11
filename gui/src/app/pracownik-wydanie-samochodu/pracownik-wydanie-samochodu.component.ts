@@ -57,9 +57,13 @@ export class PracownikWydanieSamochoduComponent implements OnInit {
   ngOnInit(): void {
     this.loginService.currnetPracownick.subscribe(pracownik => this.zalogowanyPracownik = pracownik);
     this.rezerwacjeService.getWydaneSamochdy().subscribe(dane => this.samochodyDoOdbioru = dane);
+    this.rezerwacjeService.getOdebraneSamochody().subscribe(dane => this.odbiorSamochoduList = dane);
     this.getRezerwacja();
-    // this.getKlient(6);
     this.getKlienci();
+
+    this.refreshRezerwacje();
+    this.refreshWypozyczenia();
+
   }
 
   getRezerwacja(): void{
@@ -107,7 +111,7 @@ export class PracownikWydanieSamochoduComponent implements OnInit {
     }else{
       console.log("Nie podano wszysktich potrzebnych informancji");
     }
-
+    this.refreshRezerwacje();
   }
 
 
@@ -129,7 +133,7 @@ export class PracownikWydanieSamochoduComponent implements OnInit {
     }else {
       console.log("Nie podano wszystkich informacji do odbioru samochdou")
     }
-    this.rezerwacjeService.getDaneAktywnychWypozyczen().subscribe(dane => this.daneAktywnychWypozyczen = dane);
+    this.refreshWypozyczenia();
   }
 
 

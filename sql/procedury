@@ -1,0 +1,101 @@
+create procedure WYSWIETLSAMOCHODY(rekordy out SYS_REFCURSOR)
+as
+begin
+    open rekordy for
+        select * from SAMOCHODY;
+end;
+/
+
+create procedure daneAktywnychRezerwacji(rekordy out SYS_REFCURSOR)
+as
+begin
+    open rekordy for
+        select IMIE,
+               NAZWISKO,
+               s.ID_SAMOCHODU,
+               MODEL,
+               MARKA,
+               r.ID_REZERWACJI,
+               r.DATA_POCZATKU_WYPOZYCZENIA,
+               r.DATA_KONCA_WYPOZYCZENIA
+        from REZERWACJA r
+                 left join WYDANIE_SAMOCHODU w
+                           on r.ID_REZERWACJI = w.ID_REZERWACJI
+                 left join SAMOCHODY s on r.ID_SAMOCHODU = s.ID_SAMOCHODU
+                 left join KLIENCI k on r.ID_KLIENTA = k.ID_KLIENTA
+        where w.ID_REZERWACJI is null
+        order by r.DATA_POCZATKU_WYPOZYCZENIA;
+end;
+/
+
+create procedure daneAktywnychWypozyczen(rekordy out SYS_REFCURSOR)
+as
+begin
+    open rekordy for
+        select w.ID_WYDANIA,
+               IMIE,
+               NAZWISKO,
+               S.ID_SAMOCHODU,
+               MARKA,
+               MODEL,
+               DATA_POCZATKU_WYPOZYCZENIA,
+               DATA_KONCA_WYPOZYCZENIA
+        from WYDANIE_SAMOCHODU w
+                 left join ODBIOR_SAMOCHODU o
+                           on w.ID_WYDANIA = o.ID_WYDANIA
+                 left join REZERWACJA R on w.ID_REZERWACJI = R.ID_REZERWACJI
+                 left join KLIENCI K on R.ID_KLIENTA = K.ID_KLIENTA
+                 left join SAMOCHODY S on R.ID_SAMOCHODU = S.ID_SAMOCHODU
+        where o.ID_WYDANIA is null
+        order by DATA_KONCA_WYPOZYCZENIA;
+end;
+/
+
+create procedure getDaneLogowaniaKlienci(rekordy out SYS_REFCURSOR)
+as
+begin
+    open rekordy for
+        SELECT * FROM LOGOWANIE_KLIENCI;
+end;
+/
+
+create procedure getDaneLogowaniaPracownicy(rekordy out SYS_REFCURSOR)
+as
+begin
+    open rekordy for
+        SELECT * FROM LOGOWANIE_PRACOWNICY;
+end;
+/
+
+create procedure getWydaneSamochody(rekordy out SYS_REFCURSOR)
+as
+begin
+    open rekordy for
+        select * from WYDANIE_SAMOCHODU;
+end;
+/
+
+create procedure getKlienci(rekordy out SYS_REFCURSOR)
+as
+begin
+    open rekordy for
+        SELECT * FROM klienci;
+end;
+/
+
+create procedure getRezerwacja(rekordy out SYS_REFCURSOR)
+as
+begin
+    open rekordy for
+        SELECT * FROM REZERWACJA;
+end;
+/
+
+create procedure getPracownicy(rekordy out SYS_REFCURSOR)
+as
+begin
+    open rekordy for
+        SELECT * FROM PRACOWNICY;
+end;
+/
+
